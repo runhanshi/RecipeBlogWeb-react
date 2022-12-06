@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { findRecipeBySearchKeyThunk } from "./ext-recipe-thunks";
 import { Link } from "react-router-dom";
+import {Navigate} from "react-router";
 
 const ExtRecipeSearch = () => {
     const [searchKey, setSearchKey] = useState('')
@@ -11,6 +12,10 @@ const ExtRecipeSearch = () => {
     useEffect(() => {
         dispatch(findRecipeBySearchKeyThunk(searchKey))
     }, [])
+    if (!currentUser || currentUser.usertype !== "Chef") {
+        console.log("NOT ALLOWED!!!")
+        return (<Navigate to={'/'}/>)
+    }
     return (
         <>
             <h1>Recipe Search</h1>
@@ -33,7 +38,7 @@ const ExtRecipeSearch = () => {
                     recipes && recipes.map((recipe) =>
                         <li key={recipe.idMeal} className="list-group-item">
                             <img alt="" src={recipe.strMealThumb} height={50} />
-                            <Link to={`/details/${recipe.idMeal}`}>
+                            <Link to={`/create-recipe/${recipe.idMeal}`}>
                                 {recipe.strMeal}
                             </Link>
                         </li>

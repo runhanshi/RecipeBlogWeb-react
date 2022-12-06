@@ -1,8 +1,7 @@
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { findRecipeByIdThunk } from "./ext-recipe-thunks";
-import { Link } from "react-router-dom";
+import {findRecipeByIdThunk, findRecipeBySearchKeyThunk} from "./ext-recipe-thunks";
 import RecipeTable from "./recipe-table";
 
 const ExtRecipeDetails = () => {
@@ -33,9 +32,23 @@ const ExtRecipeDetails = () => {
                 </div>
             </div>
             <div>
+                <h2>Category</h2>
+                {details.strCategory}
                 <h2>Ingredients</h2>
-                <RecipeTable param={ingredientMatrix}></RecipeTable>
+                <RecipeTable param={ingredientMatrix}/>
+                <br/>
+                <h2>Instructions</h2>
+                {details.strInstructions}
             </div>
+            <br/>
+
+            <button
+                className="btn btn-primary float-end"
+                onClick={() => {
+                    // dispatch(findRecipeBySearchKeyThunk(searchKey))
+                    console.log("Create!")
+                }}>Create
+            </button>
 
             <pre>
                 {JSON.stringify(details, null, 2)}

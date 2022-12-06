@@ -6,7 +6,11 @@ const Navigation = () => {
     const {currentUser} = useSelector((state) => state.users)
     const {pathname} = useLocation()
     const parts = pathname.split('/')
-    console.log(parts)
+    let userType = 'default'
+    if (currentUser) {
+        userType = currentUser.usertype
+    }
+    console.log(userType)
     return(
         <ul className="nav nav-pills">
             <li className="nav-item">
@@ -15,10 +19,11 @@ const Navigation = () => {
                     Home
                 </Link>
             </li>
-            <li className="nav-item">
-                <Link to="/search"
+
+            <li className={`nav-item ${userType === 'Chef' ? '':'d-none'}`}>
+                <Link to="/create-recipe"
                       className={`nav-link ${parts[1] === 'search'?'active': ''}`}>
-                    Search
+                    Create Recipe
                 </Link>
             </li>
             <li className={`nav-item ${!currentUser ? 'd-none':''}`}>

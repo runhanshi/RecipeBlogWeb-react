@@ -1,9 +1,13 @@
-import Movies from "./movies";
-import moviesReducer from "./movies/movies-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
+
+import ExtRecipeSearch from "./ext-recipe/ext-recipe-search";
+import extRecipeReducer from "./ext-recipe/ext-recipe-reducer"
+import ExtRecipeDetails from "./ext-recipe/ext-recipe-detail";
+
+import Movies from "./movies";
+import moviesReducer from "./movies/movies-reducer";
 import omdbReducer from "./omdb/omdb-reducer";
-import OmdbSearch from "./omdb/omdb-search";
 import {likesReducer} from "./likes/likes-reducer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -29,7 +33,9 @@ const store = configureStore({
         likes: likesReducer,
         users: usersReducer,
         reviews: reviewsReducer,
-        follows: followsReducer
+        follows: followsReducer,
+
+        ext_recipe: extRecipeReducer,
     }
 })
 
@@ -42,7 +48,8 @@ function App() {
                         <Navigation/>
                         <Routes>
                             <Route index element={<Movies/>}/>
-                            <Route path="/search" element={<OmdbSearch/>}/>
+                            <Route path="/create-recipe" element={<ExtRecipeSearch/>}/>
+                            <Route path="/create-recipe/:recipeID" element={<ExtRecipeDetails />} />
                             <Route path="/users" element={
                                 <ProtectedRoute>
                                     <Users/>
@@ -55,7 +62,6 @@ function App() {
                                     <Profile/>
                                 </ProtectedRoute>
                             }/>
-                            <Route path="/details/:imdbID" element={<OmdbDetails/>}/>
                             <Route path="/profile/:uid" element={<PublicProfile/>}/>
                         </Routes>
                     </CurrentUser>

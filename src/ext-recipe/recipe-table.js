@@ -6,7 +6,7 @@ class RecipeTable extends Component {
         var body = this.props.param;
         return (
             <div >
-                <Table heading={heading} body={body} />,
+                <Table heading={heading} body={body} />
             </div>
         );
     }
