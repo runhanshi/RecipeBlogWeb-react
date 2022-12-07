@@ -8,6 +8,7 @@ import RecipeCreateSuccess from "./int-recipe/recipe-create-success";
 import RecipeCreateFail from "./int-recipe/recipe-create-fail";
 import intRecipeReducer from "./int-recipe/int-recipe-reducer"
 import IntRecipeDetails from "./int-recipe/int-recipe-detail";
+import RecipeDeleteFail from "./int-recipe/recipe-delete-fail";
 
 
 import Movies from "./movies";
@@ -27,7 +28,7 @@ import CurrentUser from "./users/current-user";
 import Profile from "./users/profile";
 import ProtectedRoute from "./users/protected-route";
 import OmdbDetails from "./omdb/omdb-details";
-import reviewsReducer from "./reviews/reviews-reducer";
+import commentsReducer from "./comments/comments-reducer";
 import PublicProfile from "./users/public-profile";
 import followsReducer from "./follows/follows-reducer";
 
@@ -37,7 +38,7 @@ const store = configureStore({
         omdb: omdbReducer,
         likes: likesReducer,
         users: usersReducer,
-        reviews: reviewsReducer,
+        comments: commentsReducer,
         follows: followsReducer,
 
         ext_recipe: extRecipeReducer,
@@ -59,6 +60,7 @@ function App() {
                             <Route path="/create-recipe/success/:intRecipeID" element={<RecipeCreateSuccess />} />
                             <Route path="/create-recipe/fail" element={<RecipeCreateFail />} />
                             <Route path="/recipes/:intRecipeID" element={<IntRecipeDetails />} />
+                            <Route path="/delete-recipe/fail" element={<RecipeDeleteFail />} />
                             <Route path="/users" element={
                                 <ProtectedRoute>
                                     <Users/>

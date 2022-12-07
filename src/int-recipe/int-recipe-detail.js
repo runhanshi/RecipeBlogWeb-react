@@ -25,7 +25,7 @@ const IntRecipeDetails = () => {
                 navigate('/')
             })
         } catch (e) {
-            // navigate('/delete-recipe/fail')
+            navigate('/delete-recipe/fail')
         }
     }
 

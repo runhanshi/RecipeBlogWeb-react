@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const REVIEW_API = 'http://localhost:4000/api/reviews'
-const MOVIE_REVIEWS_API = 'http://localhost:4000/api/movies'
-const AUTHOR_REVIEWS_API = 'http://localhost:4000/api/users'
+const REVIEW_API = 'http://localhost:4000/api/comments'
+const MOVIE_REVIEWS_API = 'http://localhost:4000/recipes'
+const AUTHOR_REVIEWS_API = 'http://localhost:4000/users'
 
 const api = axios.create({withCredentials: true});
 

@@ -1,10 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {createReviewThunk, findReviewsByAuthorThunk, findReviewsByMovieThunk} from "./reviews-thunks";
 
-const reviewsReducer = createSlice({
-    name: 'reviews',
+const commentsReducer = createSlice({
+    name: 'comments',
     initialState: {
-        reviews: []
+        comments: []
     },
     extraReducers: {
         [createReviewThunk.fulfilled]: (state, action) => {
@@ -19,4 +19,4 @@ const reviewsReducer = createSlice({
     }
 })
 
-export default reviewsReducer.reducer
+export default commentsReducer.reducer

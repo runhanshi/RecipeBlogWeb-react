@@ -2,7 +2,7 @@ import {useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {findMovieByImdbIdThunk} from "./omdb-thunks";
-import {createReviewThunk, findReviewsByMovieThunk} from "../reviews/reviews-thunks";
+import {createReviewThunk, findReviewsByMovieThunk} from "../comments/reviews-thunks";
 import {Link} from "react-router-dom";
 
 const OmdbDetails = () => {
