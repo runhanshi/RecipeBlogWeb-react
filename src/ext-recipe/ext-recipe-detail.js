@@ -17,7 +17,7 @@ const ExtRecipeDetails = () => {
     useEffect(() => {
         dispatch(findRecipeByIdThunk(recipeID))
     }, [])
-    if (!currentUser || currentUser.usertype !== "Chef") {
+    if (!currentUser || currentUser.usertype !== "CHEF") {
         console.log("NOT ALLOWED!!!")
         return (<Navigate to={'/'}/>)
     }

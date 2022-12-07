@@ -61,8 +61,8 @@ const Register = () => {
                     <select id="select-usertype" value={usertype} onChange={(e) => {
                         setUsertype(e.target.value )}}>
                         <option defaultValue="CUSTOMER">Customer</option>
-                        <option value="Creator">Chef</option>
-                        <option value="ADMIN">Gourmet</option>
+                        <option value="CHEF">Chef</option>
+                        <option value="GOURMET">Gourmet</option>
                     </select>
 
                 </div>

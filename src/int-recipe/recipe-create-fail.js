@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 
 const RecipeCreateFail = () => {
     const { currentUser } = useSelector((state) => state.users)
-    if (!currentUser || currentUser.usertype !== "Chef") {
+    if (!currentUser || currentUser.usertype !== "CHEF") {
         console.log("NOT ALLOWED!!!")
         return (<Navigate to={'/'}/>)
     }

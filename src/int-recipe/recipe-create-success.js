@@ -7,7 +7,7 @@ const RecipeCreateSuccess = () => {
     const { currentUser } = useSelector((state) => state.users)
     const { state } = useLocation();
     const recipeName = state.name
-    if (!currentUser || currentUser.usertype !== "Chef") {
+    if (!currentUser || currentUser.usertype !== "CHEF") {
         console.log("NOT ALLOWED!!!")
         return (<Navigate to={'/'}/>)
     }

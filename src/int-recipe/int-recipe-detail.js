@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router"
 
-import {createRecipeThunk, findIntRecipeByIDThunk} from "./int-recipe-thunks";
+import {createRecipeThunk, deleteRecipeThunk, findIntRecipeByIDThunk} from "./int-recipe-thunks";
 import RecipeTable from "../ext-recipe/recipe-table";
 import {Link} from "react-router-dom";
 
 const IntRecipeDetails = () => {
     const { intRecipeID } = useParams()
+    const { currentUser } = useSelector((state) => state.users)
     const { int_recipe_details } = useSelector((state) => state.int_recipe)
     const navigate = useNavigate()
-    const { currentUser } = useSelector((state) => state.users)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findIntRecipeByIDThunk(intRecipeID))
@@ -19,30 +19,24 @@ const IntRecipeDetails = () => {
 
     const handleDeleteRecipeBtn = () => {
         try {
-            console.log("create recipe")
-            const newRecipe =
-                {}
-
-            const response = dispatch(createRecipeThunk(newRecipe))
+            const response = dispatch(deleteRecipeThunk(intRecipeID))
             response.then((res) => {
-                console.log("navigate!")
-                console.log(int_recipe_details.name)
-                navigate(`/create-recipe/success/${res.payload._id}`,
-                    {state:
-                            {name: int_recipe_details.strMeal}
-                    })
+                console.log("delete!")
+                navigate('/')
             })
-
         } catch (e) {
-            navigate('/create-recipe/fail')
+            // navigate('/delete-recipe/fail')
         }
     }
 
     return (
         <>
-            Created By
-            <Link to={`/profile/${currentUser._id}`}> {currentUser.username}
-            </Link>
+            {currentUser && (<div>
+                Created By
+                <Link to={`/profile/${currentUser._id}`}> {currentUser.username}
+                </Link>
+            </div>)}
+
             <h1>{int_recipe_details.strMeal}</h1>
             <div className="row">
                 <div className="col">
@@ -59,7 +53,7 @@ const IntRecipeDetails = () => {
             </div>
             <br/>
 
-            {(currentUser && currentUser.usertype === "Chef") && (<button
+            {(currentUser && (currentUser._id === int_recipe_details.chefID)) && (<button
                 className="btn btn-primary float-end"
                 onClick={handleDeleteRecipeBtn}>Delete
             </button>)}

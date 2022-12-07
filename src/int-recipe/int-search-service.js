@@ -10,7 +10,7 @@ export const createRecipe = async (int_recipe) => {
 }
 
 export const deleteRecipe = async (recipeID) => {
-    const response = await api.delete(`${BASE_API_URL}/recipes`, recipeID)
+    const response = await api.delete(`${BASE_API_URL}/recipes/${recipeID}`, recipeID)
     return response.data
 }
 
