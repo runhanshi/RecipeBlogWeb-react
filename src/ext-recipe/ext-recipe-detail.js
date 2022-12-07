@@ -1,15 +1,18 @@
-import {Navigate, useParams} from "react-router";
+import {Navigate, useNavigation, useParams} from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router"
+
 import {findRecipeByIdThunk} from "./ext-recipe-thunks";
 import {createRecipeThunk} from "../int-recipe/int-recipe-thunks";
-
 import RecipeTable from "./recipe-table";
-import {loginThunk} from "../users/users-thunk";
 
 const ExtRecipeDetails = () => {
     const { recipeID } = useParams()
     const { details } = useSelector((state) => state.ext_recipe)
+    const { int_recipe_details } = useSelector((state) => state.int_recipe)
+    const navigate = useNavigate()
+
     const { currentUser } = useSelector((state) => state.users)
     const dispatch = useDispatch()
     useEffect(() => {
@@ -46,8 +49,19 @@ const ExtRecipeDetails = () => {
                     picture: details.strMealThumb,
                     ingredients: ingredients,
                     measures: measures,
+                    extID: recipeID,
                 }
-            dispatch(createRecipeThunk(newRecipe))
+
+                const response = dispatch(createRecipeThunk(newRecipe))
+            response.then((res) => {
+                console.log("navigate!")
+                console.log(details.strMeal)
+                navigate(`/create-recipe/success/${res.payload._id}`,
+                    {state:
+                        {name: details.strMeal}
+                    })
+            })
+
         } catch (e) {
             console.log("create recipe error")
         }

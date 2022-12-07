@@ -6,7 +6,7 @@ import {Navigate} from "react-router";
 
 const ExtRecipeSearch = () => {
     const [searchKey, setSearchKey] = useState('')
-    const { recipes, loading } = useSelector((state) => state.ext_recipe)
+    const { recipes } = useSelector((state) => state.ext_recipe)
     const { currentUser } = useSelector((state) => state.users)
     const dispatch = useDispatch()
     useEffect(() => {

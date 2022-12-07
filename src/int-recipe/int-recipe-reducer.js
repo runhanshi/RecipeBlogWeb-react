@@ -5,7 +5,7 @@ import {createRecipeThunk} from "./int-recipe-thunks";
 const initialState = {
     recipes: [],
     loading: false,
-    details: {}
+    int_recipe_details: {}
 }
 
 const intRecipeReducer = createSlice({
@@ -13,7 +13,7 @@ const intRecipeReducer = createSlice({
     initialState,
     extraReducers: {
         [createRecipeThunk.fulfilled]: (state, action) => {
-            state.recipes = action.payload
+            state.int_recipe_details = action.payload
         },
     }
 })

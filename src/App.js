@@ -4,6 +4,8 @@ import {Provider} from "react-redux";
 import ExtRecipeSearch from "./ext-recipe/ext-recipe-search";
 import extRecipeReducer from "./ext-recipe/ext-recipe-reducer"
 import ExtRecipeDetails from "./ext-recipe/ext-recipe-detail";
+import RecipeCreateSuccess from "./int-recipe/recipe-create-success";
+import intRecipeReducer from "./int-recipe/int-recipe-reducer"
 
 import Movies from "./movies";
 import moviesReducer from "./movies/movies-reducer";
@@ -36,6 +38,7 @@ const store = configureStore({
         follows: followsReducer,
 
         ext_recipe: extRecipeReducer,
+        int_recipe: intRecipeReducer,
     }
 })
 
@@ -50,6 +53,7 @@ function App() {
                             <Route index element={<Movies/>}/>
                             <Route path="/create-recipe" element={<ExtRecipeSearch/>}/>
                             <Route path="/create-recipe/:recipeID" element={<ExtRecipeDetails />} />
+                            <Route path="/create-recipe/success/:intRecipeID" element={<RecipeCreateSuccess />} />
                             <Route path="/users" element={
                                 <ProtectedRoute>
                                     <Users/>

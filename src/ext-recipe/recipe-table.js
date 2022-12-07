@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 class RecipeTable extends Component {
     render() {
-        var heading = ['Ingredient', 'Measure'];
-        var body = this.props.param;
+        let heading = ['Ingredient', 'Measure'];
+        let body = this.props.param;
         return (
             <div >
                 <Table heading={heading} body={body} />
@@ -14,8 +14,8 @@ class RecipeTable extends Component {
 
 class Table extends Component {
     render() {
-        var heading = this.props.heading;
-        var body = this.props.body;
+        let heading = this.props.heading;
+        let body = this.props.body;
         return (
             <table style={{ width: 500 }}>
                 <thead>
@@ -33,7 +33,7 @@ class Table extends Component {
 
 class TableRow extends Component {
     render() {
-        var row = this.props.row;
+        let row = this.props.row;
         return (
             <tr>
                 {row.map(val => <td>{val}</td>)}
