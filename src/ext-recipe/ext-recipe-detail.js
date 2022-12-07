@@ -10,7 +10,6 @@ import RecipeTable from "./recipe-table";
 const ExtRecipeDetails = () => {
     const { recipeID } = useParams()
     const { details } = useSelector((state) => state.ext_recipe)
-    const { int_recipe_details } = useSelector((state) => state.int_recipe)
     const navigate = useNavigate()
 
     const { currentUser } = useSelector((state) => state.users)

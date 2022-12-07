@@ -1,7 +1,9 @@
 import {Navigate } from "react-router";
 import {Link } from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const RecipeCreateFail = () => {
+    const { currentUser } = useSelector((state) => state.users)
     if (!currentUser || currentUser.usertype !== "Chef") {
         console.log("NOT ALLOWED!!!")
         return (<Navigate to={'/'}/>)
