@@ -63,7 +63,7 @@ const ExtRecipeDetails = () => {
             })
 
         } catch (e) {
-            console.log("create recipe error")
+            navigate('/create-recipe/fail')
         }
     }
 
