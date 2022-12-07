@@ -7,6 +7,7 @@ import ExtRecipeDetails from "./ext-recipe/ext-recipe-detail";
 import RecipeCreateSuccess from "./int-recipe/recipe-create-success";
 import RecipeCreateFail from "./int-recipe/recipe-create-fail";
 import intRecipeReducer from "./int-recipe/int-recipe-reducer"
+import IntRecipeDetails from "./int-recipe/int-recipe-detail";
 
 
 import Movies from "./movies";
@@ -57,6 +58,7 @@ function App() {
                             <Route path="/create-recipe/:recipeID" element={<ExtRecipeDetails />} />
                             <Route path="/create-recipe/success/:intRecipeID" element={<RecipeCreateSuccess />} />
                             <Route path="/create-recipe/fail" element={<RecipeCreateFail />} />
+                            <Route path="/recipes/:intRecipeID" element={<IntRecipeDetails />} />
                             <Route path="/users" element={
                                 <ProtectedRoute>
                                     <Users/>

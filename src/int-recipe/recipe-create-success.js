@@ -16,8 +16,8 @@ const RecipeCreateSuccess = () => {
         <>
             <p>Thank you {currentUser.username}</p>
             <p>You just created a recipe for {recipeName}</p>
-            <Link to={'/'}>
-                View Recipe: {intRecipeID}
+            <Link to={`/recipes/${intRecipeID}`}>
+                View Recipe
             </Link>
 
             <pre>

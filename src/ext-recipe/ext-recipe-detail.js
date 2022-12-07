@@ -21,7 +21,7 @@ const ExtRecipeDetails = () => {
         console.log("NOT ALLOWED!!!")
         return (<Navigate to={'/'}/>)
     }
-    const ingredientMatrix = [[]]
+    let ingredientMatrix = []
     let ingredients = []
     let measures = []
 
@@ -29,28 +29,31 @@ const ExtRecipeDetails = () => {
         if (details[`strIngredient${i}`]) {
             let ingredient = details[`strIngredient${i}`]
             let measure = details[`strMeasure${i}`]
-            ingredient = ingredient.charAt(0).toUpperCase() + ingredient.slice(1);
-            measure = measure.charAt(0).toUpperCase() + measure.slice(1);
-            ingredients.push(ingredient)
-            measures.push(measure)
-            const combine = [ingredient, measure]
-            ingredientMatrix.push(combine)
+            if (ingredient.length !== 0 || measure.length !== 0) {
+                ingredient = ingredient.charAt(0).toUpperCase() + ingredient.slice(1);
+                measure = measure.charAt(0).toUpperCase() + measure.slice(1);
+                ingredients.push(ingredient)
+                measures.push(measure)
+                let combine = [ingredient, measure]
+                ingredientMatrix.push(combine)
+            }
         }
     }
-
     const handleCreateRecipeBtn = () => {
         try {
             console.log("create recipe")
             const newRecipe =
                 {name: details.strMeal,
-                    chef: currentUser.username,
+                    chefID: currentUser._id,
                     category: details.strCategory,
                     picture: details.strMealThumb,
-                    ingredients: ingredients,
-                    measures: measures,
+                    ingredients: ingredientMatrix,
                     extID: recipeID,
+                    instructions: details.strInstructions,
+                    recommendedBy: "",
+                    createTime: new Date(),
                 }
-
+                console.log(newRecipe)
                 const response = dispatch(createRecipeThunk(newRecipe))
             response.then((res) => {
                 console.log("navigate!")
