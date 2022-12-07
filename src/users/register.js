@@ -1,7 +1,6 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {registerThunk} from "./users-thunk";
-import {current} from "@reduxjs/toolkit";
 import {Navigate} from "react-router";
 
 const Register = () => {
@@ -9,7 +8,7 @@ const Register = () => {
     const [username, setUsername] = useState('')
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
-    const [usertype, setUsertype] = useState('')
+    const [usertype, setUsertype] = useState('CUSTOMER')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [dateofbirth, setDateofBirth] = useState('')
@@ -18,8 +17,9 @@ const Register = () => {
     const dispatch = useDispatch()
     const handleRegisterBtn = () => {
         const newUser = {username, usertype, firstname,lastname,email,phone, dateofbirth,password}
+        console.log(newUser)
         dispatch(registerThunk(newUser))
-       }
+    }
 
     if(currentUser) {
         return (<Navigate to={'/profile'}/>)
@@ -57,10 +57,10 @@ const Register = () => {
                 </div>
 
                 <div className="mb-3">
-                    <label className="usertypeselect">&nbsp; Please choose your Usertype(select one)</label>
+                    <label className="usertypeselect">&nbsp; Please choose your Usertype (select one)</label>
                     <select id="select-usertype" value={usertype} onChange={(e) => {
-                        setUsertype(e.target.value )}}>
-                        <option defaultValue="CUSTOMER">Customer</option>
+                        setUsertype(e.target.value)}}>
+                        <option value="CUSTOMER" selected>Customer</option>
                         <option value="CHEF">Chef</option>
                         <option value="GOURMET">Gourmet</option>
                     </select>

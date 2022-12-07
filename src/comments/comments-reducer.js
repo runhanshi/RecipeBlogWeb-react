@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {createReviewThunk, findReviewsByAuthorThunk, findReviewsByMovieThunk} from "./reviews-thunks";
+import {createCommentThunk, findCommentByRecipeThunk, findCommentByCustomerThunk} from "./comments-thunks";
 
 const commentsReducer = createSlice({
     name: 'comments',
@@ -7,14 +7,14 @@ const commentsReducer = createSlice({
         comments: []
     },
     extraReducers: {
-        [createReviewThunk.fulfilled]: (state, action) => {
-            state.reviews.push(action.payload)
+        [createCommentThunk.fulfilled]: (state, action) => {
+            state.comments.push(action.payload)
         },
-        [findReviewsByMovieThunk.fulfilled]: (state, action) => {
-            state.reviews = action.payload
+        [findCommentByRecipeThunk.fulfilled]: (state, action) => {
+            state.comments = action.payload
         },
-        [findReviewsByAuthorThunk.fulfilled]: (state, action) => {
-            state.reviews = action.payload
+        [findCommentByCustomerThunk.fulfilled]: (state, action) => {
+            state.comments = action.payload
         }
     }
 })

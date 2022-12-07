@@ -42,23 +42,23 @@ const ExtRecipeDetails = () => {
     const handleCreateRecipeBtn = () => {
         try {
             console.log("create recipe")
-            const newRecipe =
-                {name: details.strMeal,
-                    chefID: currentUser._id,
-                    category: details.strCategory,
-                    picture: details.strMealThumb,
-                    ingredients: ingredientMatrix,
-                    extID: recipeID,
-                    instructions: details.strInstructions,
-                    recommendedBy: "",
-                    createTime: new Date(),
-                }
-                console.log(newRecipe)
-                const response = dispatch(createRecipeThunk(newRecipe))
-            response.then((res) => {
+            const newRecipe = {name: details.strMeal,
+                chefID: currentUser._id,
+                chef: currentUser.username,
+                category: details.strCategory,
+                picture: details.strMealThumb,
+                ingredients: ingredientMatrix,
+                extID: recipeID,
+                instructions: details.strInstructions,
+                recommendedBy: "",
+                createTime: new Date(),
+            };
+            console.log(newRecipe)
+            const response = dispatch(createRecipeThunk(newRecipe));
+            response.then((data) => {
                 console.log("navigate!")
                 console.log(details.strMeal)
-                navigate(`/create-recipe/success/${res.payload._id}`,
+                navigate(`/create-recipe/success/${data.payload._id}`,
                     {state:
                         {name: details.strMeal}
                     })

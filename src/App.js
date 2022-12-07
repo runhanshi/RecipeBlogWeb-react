@@ -10,7 +10,6 @@ import intRecipeReducer from "./int-recipe/int-recipe-reducer"
 import IntRecipeDetails from "./int-recipe/int-recipe-detail";
 import RecipeDeleteFail from "./int-recipe/recipe-delete-fail";
 
-
 import Movies from "./movies";
 import moviesReducer from "./movies/movies-reducer";
 import omdbReducer from "./omdb/omdb-reducer";
@@ -37,12 +36,12 @@ const store = configureStore({
         movies: moviesReducer,
         omdb: omdbReducer,
         likes: likesReducer,
-        users: usersReducer,
-        comments: commentsReducer,
         follows: followsReducer,
 
+        users: usersReducer,
         ext_recipe: extRecipeReducer,
         int_recipe: intRecipeReducer,
+        comments: commentsReducer,
     }
 })
 

@@ -1,22 +1,23 @@
 import axios from "axios";
 
-const REVIEW_API = 'http://localhost:4000/api/comments'
-const MOVIE_REVIEWS_API = 'http://localhost:4000/recipes'
-const AUTHOR_REVIEWS_API = 'http://localhost:4000/users'
+const COMMENT_API = 'http://localhost:4000/comments'
+const RECIPE_COMMENTS_API = 'http://localhost:4000/recipes'
+const CUSTOMER_COMMENTS_API = 'http://localhost:4000/customers'
 
 const api = axios.create({withCredentials: true});
 
-export const createReview = async (review) => {
-    const response = await api.post(REVIEW_API, review)
+export const createComment = async (comment) => {
+    console.log("creating comment...")
+    const response = await api.post(COMMENT_API, comment)
     return response.data
 }
 
-export const findReviewsByMovie = async (imdbID) => {
-    const response = await api.get(`${MOVIE_REVIEWS_API}/${imdbID}/reviews`)
+export const findCommentByRecipe = async (rid) => {
+    const response = await api.get(`${RECIPE_COMMENTS_API}/${rid}/comments`)
     return response.data
 }
 
-export const findReviewsByAuthor = async (author) => {
-    const response = await api.get(`${AUTHOR_REVIEWS_API}/${author}/reviews`)
+export const findCommentByCustomer = async (cid) => {
+    const response = await api.get(`${CUSTOMER_COMMENTS_API}/${cid}/reviews`)
     return response.data
 }
