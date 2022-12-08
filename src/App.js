@@ -13,7 +13,7 @@ import RecipeDeleteFail from "./int-recipe/recipe-delete-fail";
 import Movies from "./movies";
 import moviesReducer from "./movies/movies-reducer";
 import omdbReducer from "./omdb/omdb-reducer";
-import {likesReducer} from "./likes/likes-reducer";
+import likesReducer from "./likes/likes-reducer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import {Routes, Route} from "react-router";
@@ -35,13 +35,13 @@ const store = configureStore({
     reducer: {
         movies: moviesReducer,
         omdb: omdbReducer,
-        likes: likesReducer,
         follows: followsReducer,
 
         users: usersReducer,
         ext_recipe: extRecipeReducer,
         int_recipe: intRecipeReducer,
         comments: commentsReducer,
+        likes: likesReducer,
     }
 })
 

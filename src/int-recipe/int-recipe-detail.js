@@ -7,18 +7,25 @@ import {createRecipeThunk, deleteRecipeThunk, findIntRecipeByIDThunk} from "./in
 import RecipeTable from "../ext-recipe/recipe-table";
 import {Link} from "react-router-dom";
 import {createCommentThunk, findCommentByRecipeThunk} from "../comments/comments-thunks";
+import {
+    customerLikesRecipeThunk,
+    customerUnLikesRecipeThunk,
+    findCustomersWhoLikeRecipeThunk
+} from "../likes/likes-thunks";
 
 const IntRecipeDetails = () => {
     const {intRecipeID} = useParams()
     const {currentUser} = useSelector((state) => state.users)
     const {int_recipe_details} = useSelector((state) => state.int_recipe)
     const {comments} = useSelector((state) => state.comments)
+    const { likes } = useSelector((state) => state.likes)
     const [comment, setComment] = useState('')
     const navigate = useNavigate()
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findCommentByRecipeThunk(intRecipeID))
         dispatch(findIntRecipeByIDThunk(intRecipeID))
+        dispatch(findCustomersWhoLikeRecipeThunk(intRecipeID))
     }, [])
 
     const handleCreateCommentBtn = () => {
@@ -42,6 +49,53 @@ const IntRecipeDetails = () => {
         } catch (e) {
             navigate('/delete-recipe/fail')
         }
+    }
+
+    const toggleLikeBtn = () => {
+        if (!currentUser || currentUser.usertype !== 'CUSTOMER') {
+            return
+        }
+        if (doesCurrentUserLikeRecipe()) {
+            // unlike
+            try {
+                const response = dispatch(customerUnLikesRecipeThunk({
+                    cid: currentUser._id,
+                    rid: intRecipeID,
+                }))
+                response.then((data) => {
+                    dispatch(findCustomersWhoLikeRecipeThunk(intRecipeID))
+                })
+            } catch (e) {
+                console.log('failed to unlike recipe')
+            }
+        } else {
+            // like
+            try {
+                const response = dispatch(customerLikesRecipeThunk({
+                    cid: currentUser._id,
+                    rid: intRecipeID,
+                }))
+                response.then((data) => {
+                    dispatch(findCustomersWhoLikeRecipeThunk(intRecipeID))
+                })
+            } catch (e) {
+                console.log('failed to like recipe')
+            }
+        }
+    }
+
+    const doesCurrentUserLikeRecipe = () => {
+        console.log("calling doesCurrentUserLikeRecipe...")
+        let liked = false;
+        if (!currentUser) {
+            return false
+        }
+        likes.forEach((like) => {
+            if (like.customer._id === currentUser._id) {
+                liked = true
+            }
+        })
+        return liked
     }
 
     return (
@@ -69,6 +123,12 @@ const IntRecipeDetails = () => {
             </div>
             <br/>
 
+            <i onClick={toggleLikeBtn}
+                 className={`bi ${doesCurrentUserLikeRecipe()? "bi-hand-thumbs-up-fill":"bi-hand-thumbs-up"}`}/>
+
+            <br/>
+            <br/>
+
             {
                 (currentUser && (currentUser._id === int_recipe_details.chefID)) && (
                     <button
@@ -86,6 +146,9 @@ const IntRecipeDetails = () => {
                     <button onClick={handleCreateCommentBtn}>Comment</button>
                 </div>
             }
+
+            <br/>
+
             <ul className="list-group">
                 {
                     comments.map((comment) =>
