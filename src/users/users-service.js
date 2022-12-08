@@ -5,6 +5,11 @@ const BASE_API_URL = 'http://localhost:4000'
 
 const api = axios.create({ withCredentials: true });
 
+export const getMyRecipes = async () => {
+    const response = await api.get(`${BASE_API_URL}/myRecipes`)
+    return response.data
+}
+
 export const findUserById = async (uid) => {
     const response = await api.get(`${USER_API_URL}/${uid}`)
     const user = response.data
