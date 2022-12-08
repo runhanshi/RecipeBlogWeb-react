@@ -3,17 +3,19 @@ import {useEffect, useState} from "react";
 import {findMostRecentTenRecommendedRecipesThunk} from "../recommendations/recommendations-thunks";
 import {Link} from "react-router-dom";
 import {findMostRecentTenLikedRecipesThunk} from "../likes/likes-thunks";
+import {findTenMostRecentlyCreatedRecipeThunk} from "../int-recipe/int-recipe-thunks";
 
 const Home = () => {
     const {currentUser} = useSelector((state) => state.users)
     const { mostRecentTenRecommendations } = useSelector((state) => state.recommendations)
     const { mostRecentLikes } = useSelector((state) => state.likes)
+    const { recentlyCreatedRecipes } = useSelector((state) => state.int_recipe)
 
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findMostRecentTenRecommendedRecipesThunk())
         dispatch(findMostRecentTenLikedRecipesThunk())
-
+        dispatch(findTenMostRecentlyCreatedRecipeThunk())
     }, [])
     return(
         <>
@@ -52,8 +54,22 @@ const Home = () => {
                     )
                 }
             </ul>
+
+            <h2>Most Recently Created Recipes</h2>
+            <ul className="list-group">
+                {
+                    recentlyCreatedRecipes && recentlyCreatedRecipes.map((recipe) =>
+                        <li key={recipe.name} className="list-group-item">
+                            <img alt="" src={recipe.picture} height={50} />
+                            <Link to={`/recipes/${recipe._id}`}>
+                                {recipe.name}
+                            </Link>
+                        </li>
+                    )
+                }
+            </ul>
             <pre>
-                {JSON.stringify(mostRecentLikes, null, 2)}
+                {JSON.stringify(recentlyCreatedRecipes, null, 2)}
             </pre>
         </>
     )

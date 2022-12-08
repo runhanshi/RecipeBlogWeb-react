@@ -3,7 +3,7 @@ import {
     addRecommendation,
     createRecipe,
     deleteRecipe,
-    findIntRecipeByID, findIntRecipeBySearchKey,
+    findIntRecipeByID, findIntRecipeBySearchKey, findTenMostRecentlyCreatedRecipe,
     removeRecommendation
 } from "./int-search-service";
 
@@ -40,4 +40,9 @@ export const findIntRecipeBySearchKeyThunk = createAsyncThunk(
         }
         return findIntRecipeBySearchKey(key)
     }
+)
+
+export const findTenMostRecentlyCreatedRecipeThunk = createAsyncThunk(
+    'findTenMostRecentlyCreatedRecipe',
+    () => findTenMostRecentlyCreatedRecipe()
 )
