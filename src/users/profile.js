@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import {useEffect, useState} from 'react';
 import { getMyRecipes } from "./users-service";
 import {Link} from "react-router-dom";
-
+import { getMyRecommends } from "./users-service";
 const Profile = () => {
     const navigate = useNavigate()
     const { currentUser } = useSelector((state) => state.users)
@@ -16,10 +16,15 @@ const Profile = () => {
         phone: currentUser.phone
     })
     const [recipes, setRecipes] = useState([]);
+    const [recommends, setRecommends] = useState([]);
     useEffect(() => {
         getMyRecipes().then((res) => {
             console.log("res = ", res);
             setRecipes(res);
+        });
+        getMyRecommends().then((res) => {
+            console.log("res = ", res);
+            setRecommends(res);
         });
     }, []);
     const dispatch = useDispatch()
@@ -86,68 +91,94 @@ const Profile = () => {
                         onClick={handleLogoutBtn}>
                         Logout
                     </button>
-                    <div>
+                    { currentUser.usertype === "CHEF" &&
+                        <div>
+                            {
+                                recipes.length == 0 && (
+                                    <div
+                                        style={{
+                                            padding: "10px 0",
+                                            color: "#666",
+                                        }}>
+                                        You do not have recipes.
+                                    </div>
+                                )
+                            }
 
-                        {
-                            recipes.length == 0 && (
-                                <div
-                                    style={{
-                                        padding: "10px 0",
-                                        color: "#666",
-                                    }}
-                                >
-                                    You do not have recipes.
-                                    {
-                                        currentUser.usertype !== "CHEF" &&
-                                        <h1> Try to become a chef now!</h1>
-                                    }
+                            <div style={{padding: "10px 0",}} className="container">
+                                <div className="row">
+                                    {recipes.map((v, i) => {
+                                        return (
+                                            <div key={i} className="col-xs-6 col-sm-4 col-lg-3">
+                                                <div className="card" style={{width: "100%",}}>
+                                                    <img src={v.picture} className="card-img-top" alt="..."/>
+                                                    <div className="card-body">
+                                                        <Link to={`/recipes/${v._id}`}>
+                                                            {v.name}
+                                                        </Link>
+                                                        <div style={{
+                                                            overflow: "hidden",
+                                                            textOverflow: "ellipsis",
+                                                            display: "-webkit-box",
+                                                            WebkitLineClamp: 2,
+                                                            WebkitBoxOrient: "vertical",
+                                                        }} className="card-text">
+                                                            {v.instructions}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
                                 </div>
-                            )
-                        }
+                            </div>
 
-                        <div
-                        style={{
-                        padding: "10px 0",
-                    }}
-                        className="container"
-                        >
-                        <div className="row">
-                    {recipes.map((v, i) => {
-                        return (
-                        <div key={i} className="col-xs-6 col-sm-4 col-lg-3">
-                        <div
-                        className="card"
-                        style={{
-                        width: "100%",
-                    }}
-                        >
-                        <img src={v.picture} className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <Link to={`/recipes/${v._id}`}>
-                                {v.name}
-                            </Link>
-                        <div
-                        style={{
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical",
-                    }}
-                        className="card-text"
-                        >
-                    {v.instructions}
                         </div>
-                        </div>
-                        </div>
-                        </div>
-                        );
-                    })}
-                        </div>
-                        </div>
+                    }
+                    { currentUser.usertype === "GOURMET" &&
+                        <div>
+                            {
+                                recommends.length == 0 && (
+                                    <div
+                                        style={{
+                                            padding: "10px 0",
+                                            color: "#666",
+                                        }}>
+                                        You do not have recommends.
+                                    </div>
+                                )
+                            }
 
-                    </div>
+                            <div style={{padding: "10px 0",}} className="container">
+                                <div className="row">
+                                    {recommends.map((v, i) => {
+                                        return (
+                                            <div key={i} className="col-xs-6 col-sm-4 col-lg-3">
+                                                <div className="card" style={{width: "100%",}}>
+                                                    <img src={v.recipe.picture} className="card-img-top" alt="..."/>
+                                                    <div className="card-body">
+                                                        <Link to={`/recipes/${v.recipe._id}`}>
+                                                            {v.recipe.name}
+                                                        </Link>
+                                                        <div style={{
+                                                            overflow: "hidden",
+                                                            textOverflow: "ellipsis",
+                                                            display: "-webkit-box",
+                                                            WebkitLineClamp: 2,
+                                                            WebkitBoxOrient: "vertical",
+                                                        }} className="card-text">
+                                                            {v.instructions}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
 
+                        </div>
+                    }
                     <button
                         className="btn btn-primary"
                         style={{ marginLeft: 200 }}
