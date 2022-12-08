@@ -14,7 +14,7 @@ import recommendationsReducer from "./recommendations/recommendations-reducer";
 import likesReducer from "./likes/likes-reducer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import {Routes, Route} from "react-router";
+import {Routes, Route, Search} from "react-router";
 import {BrowserRouter} from "react-router-dom";
 import Navigation from "./navigation";
 import Users from "./users";
@@ -27,6 +27,7 @@ import ProtectedRoute from "./users/protected-route";
 import commentsReducer from "./comments/comments-reducer";
 import PublicProfile from "./users/public-profile";
 import followsReducer from "./follows/follows-reducer";
+import IntRecipeSearch from "./int-recipe/int-recipe-search";
 
 const store = configureStore({
     reducer: {
@@ -55,6 +56,7 @@ function App() {
                             <Route path="/create-recipe/fail" element={<RecipeCreateFail />} />
                             <Route path="/recipes/:intRecipeID" element={<IntRecipeDetails />} />
                             <Route path="/delete-recipe/fail" element={<RecipeDeleteFail />} />
+                            <Route path="/search" element={<IntRecipeSearch />} />
                             <Route path="/users" element={
                                 <ProtectedRoute>
                                     <Users/>

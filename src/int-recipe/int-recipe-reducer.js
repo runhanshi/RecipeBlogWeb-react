@@ -3,7 +3,7 @@ import {
     createRecipeThunk,
     findIntRecipeByIDThunk,
     deleteRecipeThunk,
-    addRecommendationThunk, removeRecommendationThunk
+    addRecommendationThunk, removeRecommendationThunk, findIntRecipeBySearchKeyThunk
 } from "./int-recipe-thunks";
 
 
@@ -31,6 +31,9 @@ const intRecipeReducer = createSlice({
         },
         [deleteRecipeThunk.fulfilled]: (state, action) => {
             state.int_recipe_details = action.payload
+        },
+        [findIntRecipeBySearchKeyThunk.fulfilled]: (state, action) => {
+            state.recipes = action.payload
         },
     }
 })

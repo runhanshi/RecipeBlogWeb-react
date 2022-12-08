@@ -20,9 +20,16 @@ const Navigation = () => {
                 </Link>
             </li>
 
+            <li className={"nav-item"}>
+                <Link to="/search"
+                      className={`nav-link ${parts[1] === 'search'?'active': ''}`}>
+                    Search
+                </Link>
+            </li>
+
             <li className={`nav-item ${userType === 'CHEF' ? '':'d-none'}`}>
                 <Link to="/create-recipe"
-                      className={`nav-link ${parts[1] === 'search'?'active': ''}`}>
+                      className={`nav-link ${parts[1] === 'create-recipe'?'active': ''}`}>
                     Create Recipe
                 </Link>
             </li>

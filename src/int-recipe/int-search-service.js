@@ -28,3 +28,8 @@ export const findIntRecipeByID = async (recipeID) => {
     const response = await api.get(`${BASE_API_URL}/recipes/${recipeID}`, recipeID)
     return response.data
 }
+
+export const findIntRecipeBySearchKey = async (key) => {
+    const response = await api.get(`${BASE_API_URL}/recipes-search/?s=${key}`)
+    return response.data
+}
