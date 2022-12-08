@@ -1,9 +1,8 @@
 import axios from "axios";
 
-const USERS_URL = 'http://localhost:4000/users'
-const LIKES_URL = 'http://localhost:4000/users/:uid/likes/:mid'
+const CUSTOMERS_URL = 'http://localhost:4000/customers'
 
-export const userLikesMovie = async (uid, mid) => {
-    const response = await axios.post(`${USERS_URL}/${uid}/likes/${mid}`)
+export const customerLikesRecipe = async (cid, rid) => {
+    const response = await axios.post(`${CUSTOMERS_URL}/${cid}/likes/${rid}`)
     return response.data
 }

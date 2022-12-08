@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {userLikesMovieThunk} from "./likes-thunks";
+import {customerLikesRecipeThunk} from "./likes-thunks";
 
 const initialState = {
     likes: [],
@@ -10,7 +10,7 @@ export const likesReducer = createSlice({
     name: 'likes',
     initialState,
     extraReducers: {
-        [userLikesMovieThunk.fulfilled]: (state, action) => {
+        [customerLikesRecipeThunk.fulfilled]: (state, action) => {
             state.likes.push(action.payload)
         }
     }
