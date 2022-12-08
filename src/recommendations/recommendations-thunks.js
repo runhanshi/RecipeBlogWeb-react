@@ -1,5 +1,10 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {gourmetRecommendsRecipe, gourmetUnrecommendsRecipe, findGourmetWhoRecommendsRecipe} from "./recommendations-service";
+import {
+    gourmetRecommendsRecipe,
+    gourmetUnrecommendsRecipe,
+    findGourmetWhoRecommendsRecipe,
+    findMostRecentTenRecommendedRecipes
+} from "./recommendations-service";
 
 export const gourmetRecommendsRecipeThunk = createAsyncThunk(
     'gourmetRecommendsRecipe',
@@ -19,5 +24,12 @@ export const findGourmetWhoRecommendsRecipeThunk = createAsyncThunk(
     'findGourmetWhoRecommendsRecipe',
     async (rid) => {
         return await findGourmetWhoRecommendsRecipe(rid)
+    }
+)
+
+export const findMostRecentTenRecommendedRecipesThunk = createAsyncThunk(
+    'findGourmetWhoRecommendsRecipe',
+    async () => {
+        return await findMostRecentTenRecommendedRecipes()
     }
 )

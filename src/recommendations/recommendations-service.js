@@ -2,6 +2,7 @@ import axios from "axios";
 
 const GOURMETS_URL = 'http://localhost:4000/gourmets'
 const RECIPES_URL = 'http://localhost:4000/recipes'
+const BASIC_URL = 'http://localhost:4000'
 
 
 export const gourmetRecommendsRecipe = async (gid, rid) => {
@@ -19,3 +20,7 @@ export const findGourmetWhoRecommendsRecipe = async (rid) => {
     return response.data
 }
 
+export const findMostRecentTenRecommendedRecipes = async () => {
+    const response = await axios.get(`${BASIC_URL}/recentRecommendations`)
+    return response.data
+}
