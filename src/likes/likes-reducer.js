@@ -1,9 +1,15 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {customerLikesRecipeThunk, findCustomersWhoLikeRecipeThunk, customerUnLikesRecipeThunk} from "./likes-thunks";
+import {
+    customerLikesRecipeThunk,
+    findCustomersWhoLikeRecipeThunk,
+    customerUnLikesRecipeThunk,
+    findMostRecentTenLikedRecipesThunk
+} from "./likes-thunks";
 
 const initialState = {
     likes: [],
-    loading: false
+    loading: false,
+    mostRecentLikes: [],
 }
 
 const likesReducer = createSlice({
@@ -18,6 +24,11 @@ const likesReducer = createSlice({
         },
         [findCustomersWhoLikeRecipeThunk.fulfilled]: (state, action) => {
             state.likes = action.payload
+        },
+        [findMostRecentTenLikedRecipesThunk.fulfilled]: (state, action) => {
+            state.mostRecentLikes = action.payload
+            console.log("...")
+            console.log(state.mostRecentLikes)
         },
     }
 })

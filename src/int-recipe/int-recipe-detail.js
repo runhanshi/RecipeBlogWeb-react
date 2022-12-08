@@ -141,7 +141,7 @@ const IntRecipeDetails = () => {
             return false
         }
         likes.forEach((like) => {
-            if (like.customer._id === currentUser._id) {
+            if (currentUser && like && like.customer._id === currentUser._id) {
                 liked = true
             }
         })
@@ -163,7 +163,7 @@ const IntRecipeDetails = () => {
         console.log("calling isCurrentUserRecommendation...")
         let isMyRecommendation = false;
 
-        if (int_recipe_details.recommendedByID === currentUser._id) {
+        if (int_recipe_details && currentUser && int_recipe_details.recommendedByID === currentUser._id) {
             isMyRecommendation = true
         }
 

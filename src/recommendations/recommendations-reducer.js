@@ -1,8 +1,14 @@
 import {createSlice} from "@reduxjs/toolkit";
-import { gourmetRecommendsRecipeThunk, gourmetUnrecommendsRecipeThunk, findGourmetWhoRecommendsRecipeThunk } from "./recommendations-thunks";
+import {
+    gourmetRecommendsRecipeThunk,
+    gourmetUnrecommendsRecipeThunk,
+    findGourmetWhoRecommendsRecipeThunk,
+    findMostRecentTenRecommendedRecipesThunk
+} from "./recommendations-thunks";
 
 const initialState = {
     recommendations: [],
+    mostRecentTenRecommendations: [],
     loading: false
 }
 
@@ -18,6 +24,9 @@ const recommendationsReducer = createSlice({
         },
         [findGourmetWhoRecommendsRecipeThunk.fulfilled]: (state, action) => {
             state.recommendation = action.payload
+        },
+        [findMostRecentTenRecommendedRecipesThunk.fulfilled]: (state, action) => {
+            state.mostRecentTenRecommendations = action.payload
         },
     }
 })

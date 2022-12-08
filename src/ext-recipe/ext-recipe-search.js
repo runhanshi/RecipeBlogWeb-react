@@ -18,7 +18,7 @@ const ExtRecipeSearch = () => {
     }
     return (
         <>
-            <h1>Recipe Search</h1>
+            <h1>Create Recipe</h1>
             <ul className="list-group">
                 <li className="list-group-item">
                     <button
