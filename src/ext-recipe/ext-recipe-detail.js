@@ -50,7 +50,8 @@ const ExtRecipeDetails = () => {
                 ingredients: ingredientMatrix,
                 extID: recipeID,
                 instructions: details.strInstructions,
-                recommendedBy: "",
+                recommendedByID: "",
+                recommendedByName: "",
                 createTime: new Date(),
             };
             console.log(newRecipe)
@@ -88,10 +89,14 @@ const ExtRecipeDetails = () => {
             </div>
             <br/>
 
-            <button
-                className="btn btn-primary float-end"
-                onClick={handleCreateRecipeBtn}>Create
-            </button>
+            {
+                (currentUser && (currentUser.usertype === 'CHEF'))
+                &&
+                (<button
+                    className="btn btn-primary float-end"
+                    onClick={handleCreateRecipeBtn}>Create
+                </button>)
+            }
 
             <pre>
                 {JSON.stringify(details, null, 2)}

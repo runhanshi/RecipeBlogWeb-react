@@ -1,9 +1,25 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {createRecipe, deleteRecipe, findIntRecipeByID} from "./int-search-service";
+import {
+    addRecommendation,
+    createRecipe,
+    deleteRecipe,
+    findIntRecipeByID,
+    removeRecommendation
+} from "./int-search-service";
 
 export const createRecipeThunk = createAsyncThunk(
     'createRecipe',
     (int_recipe) => createRecipe(int_recipe)
+)
+
+export const addRecommendationThunk = createAsyncThunk(
+    'addRecommendation',
+    (recommendation) => addRecommendation(recommendation)
+)
+
+export const removeRecommendationThunk = createAsyncThunk(
+    'removeRecommendation',
+    (recipeID) => removeRecommendation(recipeID)
 )
 
 export const deleteRecipeThunk = createAsyncThunk(

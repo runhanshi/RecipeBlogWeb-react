@@ -3,7 +3,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router"
 
-import {createRecipeThunk, deleteRecipeThunk, findIntRecipeByIDThunk} from "./int-recipe-thunks";
+import {
+    addRecommendationThunk,
+    deleteRecipeThunk,
+    findIntRecipeByIDThunk,
+    removeRecommendationThunk
+} from "./int-recipe-thunks";
 import RecipeTable from "../ext-recipe/recipe-table";
 import {Link} from "react-router-dom";
 import {createCommentThunk, findCommentByRecipeThunk} from "../comments/comments-thunks";
@@ -12,6 +17,7 @@ import {
     customerUnLikesRecipeThunk,
     findCustomersWhoLikeRecipeThunk
 } from "../likes/likes-thunks";
+import {gourmetRecommendsRecipeThunk, gourmetUnrecommendsRecipeThunk} from "../recommendations/recommendations-thunks";
 
 const IntRecipeDetails = () => {
     const {intRecipeID} = useParams()
@@ -84,6 +90,50 @@ const IntRecipeDetails = () => {
         }
     }
 
+    const recommendBtn = () => {
+        if (!currentUser || currentUser.usertype !== 'GOURMET') {
+            return
+        }
+        try {
+            const response1 = dispatch(gourmetRecommendsRecipeThunk({
+                gid: currentUser._id,
+                rid: intRecipeID,
+            }))
+            response1.then(() => {
+                const response2 = dispatch(addRecommendationThunk({
+                    rid: intRecipeID,
+                    recommendedByID: currentUser._id,
+                    recommendedByName: currentUser.username
+                }))
+                response2.then(() => {
+                    dispatch(findIntRecipeByIDThunk(intRecipeID))
+                })
+            })
+        } catch (e) {
+            console.log('failed to recommend recipe')
+        }
+    }
+
+    const unrecommendBtn = () => {
+        if (!currentUser || currentUser.usertype !== 'GOURMET') {
+            return
+        }
+        try {
+            const response1 = dispatch(gourmetUnrecommendsRecipeThunk({
+                gid: currentUser._id,
+                rid: intRecipeID,
+            }))
+            response1.then(() => {
+                const response2 = dispatch(removeRecommendationThunk(intRecipeID))
+                response2.then(() => {
+                    dispatch(findIntRecipeByIDThunk(intRecipeID))
+                })
+            })
+        } catch (e) {
+            console.log('failed to unrecommend recipe')
+        }
+    }
+
     const doesCurrentUserLikeRecipe = () => {
         console.log("calling doesCurrentUserLikeRecipe...")
         let liked = false;
@@ -98,15 +148,39 @@ const IntRecipeDetails = () => {
         return liked
     }
 
+    const isRecommended = () => {
+        console.log("calling isRecommended...")
+        let recommended = false;
+        console.log(int_recipe_details.recommendedBy)
+        if (int_recipe_details.recommendedByID && int_recipe_details.recommendedByID.length > 0) {
+            recommended = true
+        }
+        console.log(recommended)
+        return recommended
+    }
+
+    const isRecommendedByCurrentUserGourmet = () => {
+        console.log("calling isCurrentUserRecommendation...")
+        let isMyRecommendation = false;
+
+        if (int_recipe_details.recommendedByID === currentUser._id) {
+            isMyRecommendation = true
+        }
+
+        return isMyRecommendation
+    }
+
     return (
         <>
             <h1>{int_recipe_details.name}</h1>
 
-            {currentUser && (<div>
-                Created By
-                <Link to={`/profile/${int_recipe_details.chefID}`}> {int_recipe_details.chef}
-                </Link>
-            </div>)}
+            {currentUser && (
+                <div>
+                    Created By
+                    <Link to={`/profile/${int_recipe_details.chefID}`}> {int_recipe_details.chef}
+                    </Link>
+                </div>)
+            }
 
             <div className="row">
                 <div className="col">
@@ -123,8 +197,46 @@ const IntRecipeDetails = () => {
             </div>
             <br/>
 
-            <i onClick={toggleLikeBtn}
-                 className={`bi ${doesCurrentUserLikeRecipe()? "bi-hand-thumbs-up-fill":"bi-hand-thumbs-up"}`}/>
+            {
+                (currentUser && (currentUser.usertype === 'GOURMET') && !isRecommended())
+                &&
+                (
+                    <button
+                        className={`btn btn-primary float-end`}
+                        onClick={recommendBtn}>Recommend
+                    </button>
+                )
+            }
+
+            {
+                (currentUser && (currentUser.usertype === 'GOURMET')
+                    && isRecommended() && isRecommendedByCurrentUserGourmet())
+                &&
+                (
+                    <button
+                        className={`btn btn-primary float-end`}
+                        onClick={unrecommendBtn}>Unrecommend
+                    </button>
+                )
+            }
+
+            {
+                (isRecommended() && !isRecommendedByCurrentUserGourmet()) &&
+                (
+                    <div>
+                        Recommended By
+                        <Link to={`/profile/${int_recipe_details.recommendedByID}`}>
+                            {int_recipe_details.recommendedByName}
+                        </Link>
+                    </div>
+                )
+            }
+
+            {
+                (!currentUser || (currentUser && (currentUser.usertype === 'CUSTOMER'))) &&
+                (<i onClick={toggleLikeBtn}
+                className={`bi ${doesCurrentUserLikeRecipe() ? "bi-hand-thumbs-up-fill" : "bi-hand-thumbs-up"}`}/>)
+            }
 
             <br/>
             <br/>
@@ -163,7 +275,7 @@ const IntRecipeDetails = () => {
             </ul>
 
             <pre>
-                {JSON.stringify(currentUser, null, 2)}
+                {JSON.stringify(int_recipe_details, null, 2)}
             </pre>
         </>
     )

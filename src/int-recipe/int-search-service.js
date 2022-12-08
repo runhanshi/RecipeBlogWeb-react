@@ -9,6 +9,16 @@ export const createRecipe = async (int_recipe) => {
     return response.data
 }
 
+export const addRecommendation = async (recommendation) => {
+    const response = await api.put(`${BASE_API_URL}/recipes/add-recommendation`, recommendation)
+    return response.data
+}
+
+export const removeRecommendation = async (recipeID) => {
+    const response = await api.put(`${BASE_API_URL}/recipes/remove-recommendation/${recipeID}`, recipeID)
+    return response.data
+}
+
 export const deleteRecipe = async (recipeID) => {
     const response = await api.delete(`${BASE_API_URL}/recipes/${recipeID}`, recipeID)
     return response.data

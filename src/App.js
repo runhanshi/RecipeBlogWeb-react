@@ -9,9 +9,8 @@ import RecipeCreateFail from "./int-recipe/recipe-create-fail";
 import intRecipeReducer from "./int-recipe/int-recipe-reducer"
 import IntRecipeDetails from "./int-recipe/int-recipe-detail";
 import RecipeDeleteFail from "./int-recipe/recipe-delete-fail";
-
 import Home from "./home";
-
+import recommendationsReducer from "./recommendations/recommendations-reducer";
 import likesReducer from "./likes/likes-reducer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -32,12 +31,12 @@ import followsReducer from "./follows/follows-reducer";
 const store = configureStore({
     reducer: {
         follows: followsReducer,
-
         users: usersReducer,
         ext_recipe: extRecipeReducer,
         int_recipe: intRecipeReducer,
         comments: commentsReducer,
         likes: likesReducer,
+        recommendations: recommendationsReducer,
     }
 })
 

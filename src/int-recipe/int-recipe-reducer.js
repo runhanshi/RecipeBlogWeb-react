@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {createRecipeThunk, findIntRecipeByIDThunk, deleteRecipeThunk} from "./int-recipe-thunks";
+import {
+    createRecipeThunk,
+    findIntRecipeByIDThunk,
+    deleteRecipeThunk,
+    addRecommendationThunk, removeRecommendationThunk
+} from "./int-recipe-thunks";
 
 
 const initialState = {
@@ -13,6 +18,12 @@ const intRecipeReducer = createSlice({
     initialState,
     extraReducers: {
         [createRecipeThunk.fulfilled]: (state, action) => {
+            state.int_recipe_details = action.payload
+        },
+        [addRecommendationThunk.fulfilled]: (state, action) => {
+            state.int_recipe_details = action.payload
+        },
+        [removeRecommendationThunk.fulfilled]: (state, action) => {
             state.int_recipe_details = action.payload
         },
         [findIntRecipeByIDThunk.fulfilled]: (state, action) => {
