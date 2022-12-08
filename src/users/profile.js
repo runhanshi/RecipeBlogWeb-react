@@ -3,6 +3,7 @@ import { logoutThunk, updateUserThunk } from "./users-thunk";
 import { useNavigate } from "react-router";
 import {useEffect, useState} from 'react';
 import { getMyRecipes } from "./users-service";
+import {Link} from "react-router-dom";
 
 const Profile = () => {
     const navigate = useNavigate()
@@ -122,7 +123,9 @@ const Profile = () => {
                         >
                         <img src={v.picture} className="card-img-top" alt="..."/>
                         <div className="card-body">
-                        <h5 className="card-title">{v.name}</h5>
+                            <Link to={`/recipes/${v._id}`}>
+                                {v.name}
+                            </Link>
                         <div
                         style={{
                         overflow: "hidden",
