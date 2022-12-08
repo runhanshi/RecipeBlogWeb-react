@@ -10,9 +10,8 @@ import intRecipeReducer from "./int-recipe/int-recipe-reducer"
 import IntRecipeDetails from "./int-recipe/int-recipe-detail";
 import RecipeDeleteFail from "./int-recipe/recipe-delete-fail";
 
-import Movies from "./movies";
-import moviesReducer from "./movies/movies-reducer";
-import omdbReducer from "./omdb/omdb-reducer";
+import Home from "./home";
+
 import likesReducer from "./likes/likes-reducer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -26,15 +25,12 @@ import Register from "./users/register";
 import CurrentUser from "./users/current-user";
 import Profile from "./users/profile";
 import ProtectedRoute from "./users/protected-route";
-import OmdbDetails from "./omdb/omdb-details";
 import commentsReducer from "./comments/comments-reducer";
 import PublicProfile from "./users/public-profile";
 import followsReducer from "./follows/follows-reducer";
 
 const store = configureStore({
     reducer: {
-        movies: moviesReducer,
-        omdb: omdbReducer,
         follows: followsReducer,
 
         users: usersReducer,
@@ -53,7 +49,7 @@ function App() {
                     <CurrentUser>
                         <Navigation/>
                         <Routes>
-                            <Route index element={<Movies/>}/>
+                            <Route index element={<Home/>}/>
                             <Route path="/create-recipe" element={<ExtRecipeSearch/>}/>
                             <Route path="/create-recipe/:recipeID" element={<ExtRecipeDetails />} />
                             <Route path="/create-recipe/success/:intRecipeID" element={<RecipeCreateSuccess />} />
