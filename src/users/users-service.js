@@ -20,6 +20,10 @@ export const getMyRecommends = async () => {
     const response = await api.get(`${BASE_API_URL}/myRecommends`)
     return response.data
 }
+export const getMyLikes = async () => {
+    const response = await api.get(`${BASE_API_URL}/myLikes`)
+    return response.data
+}
 
 export const register = async (user) => {
     const response = await api.post(`${BASE_API_URL}/register`, user)

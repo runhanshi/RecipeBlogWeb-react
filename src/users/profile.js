@@ -3,6 +3,8 @@ import { logoutThunk, updateUserThunk } from "./users-thunk";
 import { useNavigate } from "react-router";
 import {useEffect, useState} from 'react';
 import { getMyRecipes } from "./users-service";
+
+import { getMyLikes } from "./users-service";
 import {Link} from "react-router-dom";
 import { getMyRecommends } from "./users-service";
 const Profile = () => {
@@ -17,6 +19,7 @@ const Profile = () => {
     })
     const [recipes, setRecipes] = useState([]);
     const [recommends, setRecommends] = useState([]);
+    const [likes, setLikes] = useState([]);
     useEffect(() => {
         getMyRecipes().then((res) => {
             console.log("res = ", res);
@@ -25,6 +28,10 @@ const Profile = () => {
         getMyRecommends().then((res) => {
             console.log("res = ", res);
             setRecommends(res);
+        });
+        getMyLikes().then((res) => {
+            console.log("res = ", res);
+            setLikes(res);
         });
     }, []);
     const dispatch = useDispatch()
@@ -152,6 +159,51 @@ const Profile = () => {
                             <div style={{padding: "10px 0",}} className="container">
                                 <div className="row">
                                     {recommends.map((v, i) => {
+                                        return (
+                                            <div key={i} className="col-xs-6 col-sm-4 col-lg-3">
+                                                <div className="card" style={{width: "100%",}}>
+                                                    <img src={v.recipe.picture} className="card-img-top" alt="..."/>
+                                                    <div className="card-body">
+                                                        <Link to={`/recipes/${v.recipe._id}`}>
+                                                            {v.recipe.name}
+                                                        </Link>
+                                                        <div style={{
+                                                            overflow: "hidden",
+                                                            textOverflow: "ellipsis",
+                                                            display: "-webkit-box",
+                                                            WebkitLineClamp: 2,
+                                                            WebkitBoxOrient: "vertical",
+                                                        }} className="card-text">
+                                                            {v.instructions}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                    { currentUser.usertype === "CUSTOMER" &&
+                        <div>
+                            <h1> My liked recipes</h1>
+                            {
+                                likes.length == 0 && (
+                                    <div
+                                        style={{
+                                            padding: "10px 0",
+                                            color: "#666",
+                                        }}>
+                                        You do not have liked recipes.
+                                    </div>
+                                )
+                            }
+
+                            <div style={{padding: "10px 0",}} className="container">
+                                <div className="row">
+                                    {likes.map((v, i) => {
                                         return (
                                             <div key={i} className="col-xs-6 col-sm-4 col-lg-3">
                                                 <div className="card" style={{width: "100%",}}>
