@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutThunk, updateUserThunk } from "./users-thunk";
 import { useNavigate } from "react-router";
 import {useEffect, useState} from 'react';
-import { getMyRecipes } from "./users-service";
+import {getMyFollowedChef, getMyRecipes} from "./users-service";
 
 import { getMyLikes } from "./users-service";
 import {Link} from "react-router-dom";
@@ -18,6 +18,8 @@ const Profile = () => {
         phone: currentUser.phone
     })
     const [recipes, setRecipes] = useState([]);
+
+    const [followChefs, setFollowChefs] = useState([]);
     const [recommends, setRecommends] = useState([]);
     const [likes, setLikes] = useState([]);
     useEffect(() => {
@@ -33,7 +35,13 @@ const Profile = () => {
             console.log("res = ", res);
             setLikes(res);
         });
+        getMyFollowedChef().then((res) => {
+            console.log("res = ", res);
+            setFollowChefs(res);
+        });
     }, []);
+
+
     const dispatch = useDispatch()
     const handleLogoutBtn = () => {
         dispatch(logoutThunk())
@@ -187,6 +195,7 @@ const Profile = () => {
                         </div>
                     }
                     { currentUser.usertype === "CUSTOMER" &&
+                        <>
                         <div>
                             <h1> My liked recipes</h1>
                             {
@@ -230,6 +239,34 @@ const Profile = () => {
                             </div>
 
                         </div>
+                        <div>
+                            <h1> My followed chef</h1>
+                            {
+                                followChefs.length == 0 && (
+                                    <div
+                                        style={{
+                                            padding: "10px 0",
+                                            color: "#666",
+                                        }}>
+                                        You have not follow any chef.
+                                    </div>
+                                )
+                            }
+                            <div style={{padding: "10px 0",}} className="container">
+                                <div className="row">
+                                    {followChefs.map((v, i) => {
+                                        return (
+                                            <Link to={`/profile/${v.followed._id}`}>
+                                                {v.followed.username}
+                                            </Link>
+
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+
+                        </>
                     }
                     <button
                         className="btn btn-primary"

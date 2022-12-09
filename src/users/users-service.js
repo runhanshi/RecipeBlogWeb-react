@@ -59,3 +59,8 @@ export const updateUser = async (params) => {
     const response = await api.put(`${BASE_API_URL}/users/${params.uid}`, params.body)
     return response.data
 }
+
+export const getMyFollowedChef = async () => {
+    const response = await api.get(`${BASE_API_URL}/myFollowedChef`)
+    return response.data
+}
