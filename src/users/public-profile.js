@@ -1,7 +1,7 @@
 import {useParams} from "react-router";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {findUserByIdThunk} from "./users-thunk";
+import {findUserByIdThunk, logoutThunk} from "./users-thunk";
 import {Link} from "react-router-dom";
 import {
     customerFollowChefThunk,
@@ -23,6 +23,7 @@ const PublicProfile = () => {
     const { currentUser } = useSelector((state) => state.users)
     const { followers } = useSelector((state) => state.follows)
     const dispatch = useDispatch()
+
 
     useEffect(() => {
         findUserById(uid).then((res) => {
@@ -90,7 +91,7 @@ const PublicProfile = () => {
             <p>Lastname: {user.lastname}</p>
             <p>Email: {user.email}</p>
             <p>Phone: {user.phone}</p>
-            {currentUser.usertype === "CUSTOMER" && user.usertype === "CHEF" && (
+            {(currentUser) && (currentUser.usertype === "CUSTOMER" && user.usertype === "CHEF") && (
                 <div>
                     <h1>s</h1>
                     <button onClick={toggleFollowBtn} disabled={loading || currentUser && currentUser.usertype !== "CUSTOMER"} type="button" className={isFollow ? 'btn btn-danger btn-sm' : 'btn btn-primary btn-sm'}>
@@ -100,6 +101,17 @@ const PublicProfile = () => {
 
                 </div>
             )}
+            {(!currentUser) &&
+                <div>
+                    <h1>You should login or register before following others.</h1>
+                    <Link to={`/login`}>
+                        Login
+                    </Link>
+                    <Link to={`/register`}>
+                        Register
+                    </Link>
+                </div>
+            }
         </>
 
     )
