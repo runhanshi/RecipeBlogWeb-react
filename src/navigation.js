@@ -12,7 +12,7 @@ const Navigation = () => {
     }
     console.log(userType)
     return(
-        <ul className="nav nav-pills fixed-top">
+        <ul className="nav nav-pills">
             <li className="nav-item">
                 <Link to="/"
                       className={`nav-link ${parts[1] === ''?'active': ''}`}>
