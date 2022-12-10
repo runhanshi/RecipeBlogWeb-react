@@ -75,3 +75,13 @@
     width: 85%;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
+
+.turn_to_login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 18px;
+    color: orange;
+    padding-bottom:5%;
+}

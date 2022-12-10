@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {registerThunk} from "./users-thunk";
 import {Navigate} from "react-router";
 import "./register.css"
+import {Link} from "react-router-dom";
 
 const Register = () => {
     const {currentUser} = useSelector((state) => state.users)
@@ -116,6 +117,7 @@ const Register = () => {
                             onClick={handleRegisterBtn}>
                             Register
                         </button>
+                        <Link className="turn_to_login" to={`/login`}>Already Register? Login now!</Link>
                     </div>
                 </div>
             </div>
