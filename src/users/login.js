@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {loginThunk} from "./users-thunk";
-import {Navigate, useNavigate} from "react-router";
+import {Navigate} from "react-router";
 import "./login.css"
 
 const Login = () => {
@@ -9,11 +9,9 @@ const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const handleLoginBtn = () => {
         try {
             dispatch(loginThunk({username, password}))
-            // navigate('/profile')
         } catch (e) {
 
         }

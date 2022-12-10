@@ -2,6 +2,7 @@ import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {registerThunk} from "./users-thunk";
 import {Navigate} from "react-router";
+import "./register.css"
 
 const Register = () => {
     const {currentUser} = useSelector((state) => state.users)
@@ -12,8 +13,8 @@ const Register = () => {
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [dateofbirth, setDateofBirth] = useState('')
-
     const [password, setPassword] = useState('')
+    const time = new Date();
     const dispatch = useDispatch()
     const handleRegisterBtn = () => {
         const newUser = {username, usertype, firstname,lastname,email,phone, dateofbirth,password}
@@ -27,97 +28,97 @@ const Register = () => {
 
     return(
         <>
-            <div className="form_wrapper">
-                <h3 className="sign">Sign Up</h3>
-                <div className="mb-3">
-                    <input
-                        type="text"
-                        className="un"
-                        placeholder="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                </div>
+            <div className="container_register">
+                <div className="screen_register">
+                    <div className="form_wrapper_register">
+                        <h3 className="register_header">Sign Up</h3>
+                        <div className="mb-3">
+                            <input
+                                type="text"
+                                className="un_register"
+                                placeholder="Username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
+                        </div>
 
-                <div className="mb-3">
-                    <label className="usertypeselect">&nbsp; Please choose your Usertype (select one)</label>
-                    <select id="select-usertype" value={usertype} onChange={(e) => {
-                        setUsertype(e.target.value)}}>
-                        <option value="CUSTOMER" selected>Customer</option>
-                        <option value="CHEF">Chef</option>
-                        <option value="GOURMET">Gourmet</option>
-                    </select>
+                        <div className="mb-3">
+                            <select id="select-usertype" className="un_register" value={usertype} onChange={(e) => {
+                                setUsertype(e.target.value)}}>
+                                <option value="CUSTOMER" selected>Customer</option>
+                                <option value="CHEF">I want to be a Chef !</option>
+                                <option value="GOURMET">I want to be a Gourmet !</option>
+                            </select>
 
-                </div>
-                <div className="mb-3">
-                    <input
-                        type="text"
-                        className="un"
-                        placeholder="Firstname"
-                        value={firstname}
-                        onChange={(e) => setFirstname( e.target.value )}
-                    />
-                </div>
+                        </div>
+                        <div className="mb-3">
+                            <input
+                                type="text"
+                                className="un_register"
+                                placeholder="Firstname"
+                                value={firstname}
+                                onChange={(e) => setFirstname( e.target.value )}
+                            />
+                        </div>
 
-                <div className="mb-3">
-                    <input
-                        type="text"
-                        className="un"
-                        placeholder="Last name"
-                        value={lastname}
-                        onChange={(e) => setLastname(  e.target.value )}
-                    />
-                </div>
+                        <div className="mb-3">
+                            <input
+                                type="text"
+                                className="un_register"
+                                placeholder="Lastname"
+                                value={lastname}
+                                onChange={(e) => setLastname(  e.target.value )}
+                            />
+                        </div>
 
-                <div className="mb-3">
-                    <input
-                        type="email"
-                        className="un"
-                        placeholder="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value )}
-                    />
-                </div>
+                        <div className="mb-3">
+                            <input
+                                type="email"
+                                className="un_register"
+                                placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value )}
+                            />
+                        </div>
 
-                <div className="mb-3">
-                    <input
-                        type="text"
-                        className="un"
-                        placeholder="phonenumber"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value )}
-                    />
-                </div>
+                        <div className="mb-3">
+                            <input
+                                type="text"
+                                className="un_register"
+                                placeholder="Phone number"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value )}
+                            />
+                        </div>
 
-                <div className="mb-3">
-                    <input
-                        type="date"
-                        className="un"
-                        placeholder="Enter DateOfBirth"
-                        value={dateofbirth}
-                        onChange={(e) => setDateofBirth(e.target.value )}
-                    />
-                </div>
+                        <div className="mb-3">
+                            <input
+                                type="date"
+                                className="un_register"
+                                placeholder="DateOfBirth"
+                                value={dateofbirth}
+                                max={(time.toISOString()).slice(0, 10)}
+                                onChange={(e) => setDateofBirth(e.target.value )}
+                            />
+                        </div>
 
-                <div className="mb-3">
-                    <input
-                        type="password"
-                        className="un"
-                        placeholder="Enter password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value )}
-                    />
+                        <div className="mb-3">
+                            <input
+                                type="password"
+                                className="un_register"
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value )}
+                            />
+                        </div>
+                        <button
+                            className="registerbtn"
+                            onClick={handleRegisterBtn}>
+                            Register
+                        </button>
+                    </div>
                 </div>
-                <button
-                    className="btn btn-primary w-100"
-                    onClick={handleRegisterBtn}>
-                    Register
-                </button>
             </div>
-            {
-                currentUser &&
-                <h1>Welcome new user: {currentUser.username}</h1>
-            }
         </>
     )
 }
