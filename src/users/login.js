@@ -2,11 +2,12 @@ import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {loginThunk} from "./users-thunk";
 import {Navigate, useNavigate} from "react-router";
+import "./login.css"
 
 const Login = () => {
     const {currentUser} = useSelector((state) => state.users)
-    const [username, setUsername] = useState('mm')
-    const [password, setPassword] = useState('mm')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const handleLoginBtn = () => {
@@ -22,18 +23,26 @@ const Login = () => {
     }
     return(
         <>
-            <h1>Login</h1>
-            <input
-                onChange={(e) => setUsername(e.target.value)}
-                className="form-control"
-                placeholder="username"
-                value={username}/>
-            <input
-                onChange={(e) => setPassword(e.target.value)}
-                className="form-control" placeholder="password" type="password" value={password}/>
-            <button
-                className="btn btn-primary w-100"
-                onClick={handleLoginBtn}>Login</button>
+            <div className="container_login">
+                <div className="screen_login">
+                    <div className="form_wrapper_login">
+                        <form className="login">
+                            <span className="login_header">Login</span>
+                            <input
+                                onChange={(e) => setUsername(e.target.value)}
+                                className="form-control un"
+                                placeholder="username"
+                                value={username}/>
+                            <input
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="form-control un" placeholder="password" type="password" value={password}/>
+                            <button
+                                className="loginbtn"
+                                onClick={handleLoginBtn}>Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </>
     )
 }
