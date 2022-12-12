@@ -4,6 +4,7 @@ import {registerThunk} from "./users-thunk";
 import {Navigate} from "react-router";
 import "./register.css"
 import {Link} from "react-router-dom";
+import PhoneInput from 'react-phone-input-2'
 
 const Register = () => {
     const {currentUser} = useSelector((state) => state.users)
