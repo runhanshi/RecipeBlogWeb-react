@@ -11,7 +11,7 @@ import {
     followUserThunk
 } from "../follows/follows-thunks";
 import {findRecipeBySearchKeyThunk} from "../ext-recipe/ext-recipe-thunks";
-import {findUserById, getMyRecipes} from "./users-service";
+import {findUserById, getChefRecipes, getMyRecipes} from "./users-service";
 import {findCustomersWhoFollowChef} from "../follows/follows-service";
 
 const PublicProfile = () => {
@@ -19,18 +19,22 @@ const PublicProfile = () => {
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(false);
     const [isFollow, setIsFollow] = useState(false);
-    // const [follows, setfollows] = useState([]);
     const { currentUser } = useSelector((state) => state.users)
     const { followers } = useSelector((state) => state.follows)
     const dispatch = useDispatch()
-
+    const [recipes,  setChefRecipes] = useState([]);
 
     useEffect(() => {
         findUserById(uid).then((res) => {
             console.log("res = ", res);
             setUser(res);
         });
+        getChefRecipes(uid).then((res) => {
+            console.log("res = ", res);
+            setChefRecipes(res);
+        });
         dispatch(findCustomersWhoFollowChefThunk(uid));
+
     }, [])
     useEffect(
         () => {
@@ -45,6 +49,7 @@ const PublicProfile = () => {
         },
         [followers]
     );
+
     const toggleFollowBtn = () => {
         if (isFollow) {
             // unfollow
@@ -98,7 +103,50 @@ const PublicProfile = () => {
 
                         {isFollow ? "- unFollow" : "+ Follow"}
                     </button>
+                    { (user.usertype === "CHEF" && isFollow) &&
+                        <div>
+                            {
+                                recipes.length === 0 && (
+                                    <div
+                                        style={{
+                                            padding: "10px 0",
+                                            color: "#666",
+                                        }}>
+                                        You do not have recipes.
+                                    </div>
+                                )
+                            }
 
+                            <div style={{padding: "10px 0",}} className="container">
+                                <div className="row">
+                                    {recipes.map((v, i) => {
+                                        return (
+                                            <div key={i} className="col-xs-6 col-sm-4 col-lg-3">
+                                                <div className="card" style={{width: "100%",}}>
+                                                    <img src={v.picture} className="card-img-top" alt="..."/>
+                                                    <div className="card-body">
+                                                        <Link to={`/recipes/${v._id}`}>
+                                                            {v.name}
+                                                        </Link>
+                                                        <div style={{
+                                                            overflow: "hidden",
+                                                            textOverflow: "ellipsis",
+                                                            display: "-webkit-box",
+                                                            WebkitLineClamp: 2,
+                                                            WebkitBoxOrient: "vertical",
+                                                        }} className="card-text">
+                                                            {v.instructions}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+
+                        </div>
+                    }
                 </div>
             )}
             {(!currentUser) &&
