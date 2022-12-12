@@ -4,11 +4,14 @@ class RecipeTable extends Component {
     render() {
         let heading = ['Ingredient', 'Measure'];
         let body = this.props.param;
+        if (!body) {
+            return
+        }
         return (
             <div >
                 <Table heading={heading} body={body} />
             </div>
-        );
+        )
     }
 }
 
