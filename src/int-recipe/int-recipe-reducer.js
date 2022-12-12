@@ -6,7 +6,7 @@ import {
     addRecommendationThunk,
     removeRecommendationThunk,
     findIntRecipeBySearchKeyThunk,
-    findTenMostRecentlyCreatedRecipeThunk
+    findTenMostRecentlyCreatedRecipeThunk, findIfRecipeExistsThunk
 } from "./int-recipe-thunks";
 
 
@@ -15,6 +15,7 @@ const initialState = {
     loading: false,
     int_recipe_details: {},
     recentlyCreatedRecipes: [],
+    recipeExistence: {},
 }
 
 const intRecipeReducer = createSlice({
@@ -41,6 +42,11 @@ const intRecipeReducer = createSlice({
         },
         [findTenMostRecentlyCreatedRecipeThunk.fulfilled]: (state, action) => {
             state.recentlyCreatedRecipes = action.payload
+        },
+        [findIfRecipeExistsThunk.fulfilled]: (state, action) => {
+            console.log("...")
+            console.log(state.recipeExistence.existence)
+            state.recipeExistence = action.payload
         },
     }
 })

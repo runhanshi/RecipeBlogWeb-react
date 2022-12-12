@@ -4,23 +4,26 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router"
 
 import {findRecipeByIdThunk} from "./ext-recipe-thunks";
-import {createRecipeThunk} from "../int-recipe/int-recipe-thunks";
+import {createRecipeThunk, findIfRecipeExistsThunk} from "../int-recipe/int-recipe-thunks";
 import RecipeTable from "./recipe-table";
 
 const ExtRecipeDetails = () => {
     const { recipeID } = useParams()
     const { details } = useSelector((state) => state.ext_recipe)
+    const { recipeExistence } = useSelector((state) => state.int_recipe)
     const navigate = useNavigate()
 
     const { currentUser } = useSelector((state) => state.users)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findRecipeByIdThunk(recipeID))
+        dispatch(findIfRecipeExistsThunk(recipeID))
     }, [])
     if (!currentUser || currentUser.usertype !== "CHEF") {
         console.log("NOT ALLOWED!!!")
         return (<Navigate to={'/'}/>)
     }
+
     let ingredientMatrix = []
     let ingredients = []
     let measures = []
@@ -54,11 +57,8 @@ const ExtRecipeDetails = () => {
                 recommendedByName: "",
                 createTime: new Date(),
             };
-            console.log(newRecipe)
             const response = dispatch(createRecipeThunk(newRecipe));
             response.then((data) => {
-                console.log("navigate!")
-                console.log(details.strMeal)
                 navigate(`/create-recipe/success/${data.payload._id}`,
                     {state:
                         {name: details.strMeal}
@@ -90,12 +90,20 @@ const ExtRecipeDetails = () => {
             <br/>
 
             {
-                (currentUser && (currentUser.usertype === 'CHEF'))
+                (currentUser && (currentUser.usertype === 'CHEF')
+                    && (recipeExistence) && (!recipeExistence.existence))
                 &&
                 (<button
                     className="btn btn-primary float-end"
                     onClick={handleCreateRecipeBtn}>Create
                 </button>)
+            }
+
+            {
+                (currentUser && (currentUser.usertype === 'CHEF')
+                    && (recipeExistence) && (recipeExistence.existence))
+                &&
+                (<p>Recipe Already Exists</p>)
             }
 
             <pre>

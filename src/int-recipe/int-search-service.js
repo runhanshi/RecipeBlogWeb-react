@@ -39,3 +39,7 @@ export const findTenMostRecentlyCreatedRecipe = async () => {
     return response.data
 }
 
+export const findIfRecipeExists = async (ExtRecipeID) => {
+    const response = await api.get(`${BASE_API_URL}/recipe-exist/${ExtRecipeID}`, ExtRecipeID)
+    return response.data
+}

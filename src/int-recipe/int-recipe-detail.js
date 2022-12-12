@@ -133,7 +133,6 @@ const IntRecipeDetails = () => {
     }
 
     const doesCurrentUserLikeRecipe = () => {
-        console.log("calling doesCurrentUserLikeRecipe...")
         let liked = false;
         if (!currentUser) {
             return false
@@ -147,18 +146,14 @@ const IntRecipeDetails = () => {
     }
 
     const isRecommended = () => {
-        console.log("calling isRecommended...")
         let recommended = false;
-        console.log(int_recipe_details.recommendedBy)
         if (int_recipe_details.recommendedByID && int_recipe_details.recommendedByID.length > 0) {
             recommended = true
         }
-        console.log(recommended)
         return recommended
     }
 
     const isRecommendedByCurrentUserGourmet = () => {
-        console.log("calling isCurrentUserRecommendation...")
         let isMyRecommendation = false;
 
         if (int_recipe_details && currentUser && int_recipe_details.recommendedByID === currentUser._id) {

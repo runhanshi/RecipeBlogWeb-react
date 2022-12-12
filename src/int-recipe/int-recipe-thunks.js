@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
     addRecommendation,
     createRecipe,
-    deleteRecipe,
+    deleteRecipe, findIfRecipeExists,
     findIntRecipeByID, findIntRecipeBySearchKey, findTenMostRecentlyCreatedRecipe,
     removeRecommendation
 } from "./int-search-service";
@@ -45,4 +45,9 @@ export const findIntRecipeBySearchKeyThunk = createAsyncThunk(
 export const findTenMostRecentlyCreatedRecipeThunk = createAsyncThunk(
     'findTenMostRecentlyCreatedRecipe',
     () => findTenMostRecentlyCreatedRecipe()
+)
+
+export const findIfRecipeExistsThunk = createAsyncThunk(
+    'findIfRecipeExists',
+    (ext_recipe) => findIfRecipeExists(ext_recipe)
 )
