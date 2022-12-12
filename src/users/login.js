@@ -2,6 +2,7 @@ import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {loginThunk} from "./users-thunk";
 import {Navigate} from "react-router";
+import Popup from 'reactjs-popup';
 import "./login.css"
 
 const Login = () => {
@@ -13,7 +14,6 @@ const Login = () => {
         try {
             dispatch(loginThunk({username, password}))
         } catch (e) {
-
         }
     }
     if (currentUser) {
