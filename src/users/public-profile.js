@@ -147,7 +147,8 @@ const PublicProfile = () => {
                                     </div>
                                 )
                             }
-
+                            {
+                                recipes.length !== 0 && (
                             <div style={{padding: "10px 0",}} className="container">
                                 <p className="ms-4 text-success unfollow-text"> Here is my past recipes! <br/></p>
                                 <div className="row ms-3">
@@ -176,6 +177,8 @@ const PublicProfile = () => {
                                     })}
                                 </div>
                             </div>
+                                )
+                            }
 
                         </div>
                     }
