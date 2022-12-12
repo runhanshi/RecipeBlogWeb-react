@@ -3,12 +3,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router"
 
-import {
-    addRecommendationThunk,
+import { addRecommendationThunk,
     deleteRecipeThunk,
     findIntRecipeByIDThunk,
-    removeRecommendationThunk
-} from "./int-recipe-thunks";
+    removeRecommendationThunk } from "./int-recipe-thunks";
 import RecipeTable from "../ext-recipe/recipe-table";
 import {Link} from "react-router-dom";
 import {createCommentThunk, findCommentByRecipeThunk} from "../comments/comments-thunks";
@@ -28,6 +26,8 @@ const IntRecipeDetails = () => {
     const [comment, setComment] = useState('')
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    let ingredientMatrix = []
+    ingredientMatrix = int_recipe_details.ingredients
     useEffect(() => {
         dispatch(findCommentByRecipeThunk(intRecipeID))
         dispatch(findIntRecipeByIDThunk(intRecipeID))
@@ -191,6 +191,7 @@ const IntRecipeDetails = () => {
                 <h2>Category</h2>
                 {int_recipe_details.category}
                 <h2>Ingredients</h2>
+                <RecipeTable param={ingredientMatrix}/>
                 <br/>
                 <h2>Instructions</h2>
                 {int_recipe_details.instructions}
