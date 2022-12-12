@@ -26,8 +26,6 @@ const IntRecipeDetails = () => {
     const [comment, setComment] = useState('')
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    let ingredientMatrix = []
-    ingredientMatrix = int_recipe_details.ingredients
     useEffect(() => {
         dispatch(findCommentByRecipeThunk(intRecipeID))
         dispatch(findIntRecipeByIDThunk(intRecipeID))
@@ -191,7 +189,9 @@ const IntRecipeDetails = () => {
                 <h2>Category</h2>
                 {int_recipe_details.category}
                 <h2>Ingredients</h2>
-                <RecipeTable param={ingredientMatrix}/>
+                { int_recipe_details &&
+                    (<RecipeTable param={int_recipe_details.ingredients}/>)
+                }
                 <br/>
                 <h2>Instructions</h2>
                 {int_recipe_details.instructions}
