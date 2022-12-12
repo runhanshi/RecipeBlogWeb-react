@@ -33,6 +33,10 @@ const usersReducer = createSlice({
         [loginThunk.fulfilled]: (state, action) => {
             state.currentUser = action.payload
         },
+        [loginThunk.rejected]: (state, action) => {
+            state.currentUser = null
+            return alert("Login failed! Please check your username and password! ")
+        },
         [findAllUsersThunk.fulfilled]: (state, action) => {
             state.users = action.payload
             state.loading = false

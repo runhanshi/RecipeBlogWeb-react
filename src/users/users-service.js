@@ -10,6 +10,11 @@ export const getMyRecipes = async () => {
     return response.data
 }
 
+export const getChefRecipes = async (uid) => {
+    const response = await api.get(`${BASE_API_URL}/chefRecipes/${uid}`)
+    return response.data
+}
+
 export const findUserById = async (uid) => {
     const response = await api.get(`${USER_API_URL}/${uid}`)
     const user = response.data
