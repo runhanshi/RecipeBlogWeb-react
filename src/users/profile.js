@@ -7,6 +7,7 @@ import {getMyFollowedChef, getMyRecipes} from "./users-service";
 import { getMyLikes } from "./users-service";
 import {Link} from "react-router-dom";
 import { getMyRecommends } from "./users-service";
+import "./profile.css"
 const Profile = () => {
     const navigate = useNavigate()
     const { currentUser } = useSelector((state) => state.users)
@@ -18,7 +19,6 @@ const Profile = () => {
         phone: currentUser.phone
     })
     const [recipes, setRecipes] = useState([]);
-
     const [followChefs, setFollowChefs] = useState([]);
     const [recommends, setRecommends] = useState([]);
     const [likes, setLikes] = useState([]);
@@ -62,30 +62,39 @@ const Profile = () => {
     console.log(currentUser)
     return (
         <>
-            {edit ? <div>
-                <div className="mb-3">
-                    <label htmlFor="firstname" className="form-label">Firstname</label>
-                    <input className="form-control" id="firstname" value={editItem.firstname} onChange={(e) => handleChange('firstname', e.target.value)} />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="lastname" className="form-label">Lastname</label>
-                    <input className="form-control" id="lastname" value={editItem.lastname} onChange={(e) => handleChange('lastname', e.target.value)} />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Email</label>
-                    <input type="email" className="form-control" id="email" value={editItem.email} onChange={(e) => handleChange('email', e.target.value)} />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="phone" className="form-label">Phone</label>
-                    <input type="number" className="form-control" id="phone" value={editItem.phone} onChange={(e) => handleChange('phone', e.target.value)} />
-                </div>
+            {edit ?
+                <div >
+                        <div className="mb-3 mt-5 edit-profile-header">
+                            <p> Feel free to change your personal information here!</p>
+                        </div>
 
-                <button
-                    className="btn btn-primary"
-                    onClick={handleEdit}>
-                    Save
-                </button>
-            </div> :
+                        <div className="mb-3">
+                            <label htmlFor="firstname" className="form-label edit-profile-label">Current Firstname</label>
+                            <br/>
+                            <input className="form-control edit-profile-input" id="firstname" value={editItem.firstname} onChange={(e) => handleChange('firstname', e.target.value)} />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="lastname" className="form-label edit-profile-label">Current Lastname</label>
+                            <br/>
+                            <input className="form-control edit-profile-input" id="lastname" value={editItem.lastname} onChange={(e) => handleChange('lastname', e.target.value)} />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="email" className="form-label edit-profile-label">Current Email</label>
+                            <br/>
+                            <input type="email" className="form-control edit-profile-input" id="email" value={editItem.email} onChange={(e) => handleChange('email', e.target.value)} />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="phone" className="form-label edit-profile-label">Current Phone</label>
+                            <br/>
+                            <input type="text" className="form-control edit-profile-input" id="phone" value={editItem.phone} onChange={(e) => handleChange('phone', e.target.value)} />
+                        </div>
+
+                        <button
+                            className="rounded-pill btn btn-outline-secondary ms-1 w-40 mt-3 fw-bold text-black ps-3 mb-4 pe-3 me-2"
+                            onClick={handleEdit}>
+                            Save your changes
+                        </button>
+                </div> :
                 <>
                     <h1>Profile</h1>
                     {
