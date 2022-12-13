@@ -13,7 +13,6 @@ const Login = () => {
         try {
             dispatch(loginThunk({username, password}))
         } catch (e) {
-
         }
     }
     if (currentUser) {

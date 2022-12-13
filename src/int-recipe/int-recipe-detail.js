@@ -3,12 +3,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router"
 
-import {
-    addRecommendationThunk,
+import { addRecommendationThunk,
     deleteRecipeThunk,
     findIntRecipeByIDThunk,
-    removeRecommendationThunk
-} from "./int-recipe-thunks";
+    removeRecommendationThunk } from "./int-recipe-thunks";
 import RecipeTable from "../ext-recipe/recipe-table";
 import {Link} from "react-router-dom";
 import {createCommentThunk, findCommentByRecipeThunk} from "../comments/comments-thunks";
@@ -135,7 +133,6 @@ const IntRecipeDetails = () => {
     }
 
     const doesCurrentUserLikeRecipe = () => {
-        console.log("calling doesCurrentUserLikeRecipe...")
         let liked = false;
         if (!currentUser) {
             return false
@@ -149,18 +146,14 @@ const IntRecipeDetails = () => {
     }
 
     const isRecommended = () => {
-        console.log("calling isRecommended...")
         let recommended = false;
-        console.log(int_recipe_details.recommendedBy)
         if (int_recipe_details.recommendedByID && int_recipe_details.recommendedByID.length > 0) {
             recommended = true
         }
-        console.log(recommended)
         return recommended
     }
 
     const isRecommendedByCurrentUserGourmet = () => {
-        console.log("calling isCurrentUserRecommendation...")
         let isMyRecommendation = false;
 
         if (int_recipe_details && currentUser && int_recipe_details.recommendedByID === currentUser._id) {
@@ -191,6 +184,9 @@ const IntRecipeDetails = () => {
                 <h2>Category</h2>
                 {int_recipe_details.category}
                 <h2>Ingredients</h2>
+                { int_recipe_details &&
+                    (<RecipeTable param={int_recipe_details.ingredients}/>)
+                }
                 <br/>
                 <h2>Instructions</h2>
                 {int_recipe_details.instructions}

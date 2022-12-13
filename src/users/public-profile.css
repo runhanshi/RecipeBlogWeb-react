@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
+
+.follow-text{
+    font-family: "Cursive", serif;
+    font-weight: bolder;
+    font-size: 24px;
+}
+
+.unfollow-text{
+    font-family: "Cursive", serif;
+    font-weight: bolder;
+    font-size: 24px;
+}
+
+.chef-no-recipes{
+    font-family: "Times New Roman", Times, serif;
+    font-size: 22px;
+    font-weight: lighter;
+    color:orange;
+}
+
+.card-recipe-name{
+    font-size: 18px;
+    font-weight: lighter;
+}
+
+.ano-login-hint{
+    font-family: "Times New Roman", Times, serif;
+    font-size: 26px;
+    font-weight: bolder;
+    color:darkred;
+}
+
+.ano-login-btn{
+    background-color: lightyellow;
+}
+
+
+body{
+    background-color: antiquewhite;
+}
+
+.pp-card{
+    background-color: linen;
+}
+
+.pp-hr{
+    border: none;
+    border-top: 3px double #333;
+    color: #333;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+    font-weight: bolder;
+}
+
+.pp-hr:after {
+    background: #fff;
+    content: '§';
+    padding: 0 4px;
+    position: relative;
+    top: -13px;
+}
