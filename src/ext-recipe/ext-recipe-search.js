@@ -20,9 +20,9 @@ const ExtRecipeSearch = () => {
         <>
             <h1>Create Recipe</h1>
             <ul className="list-group">
-                <li className="list-group-item">
+                <li className="find-bar list-group-item border-0 ">
                     <button
-                        className="btn btn-primary float-end"
+                        className="btn btn-secondary float-end"
                         onClick={() => {
                             dispatch(findRecipeBySearchKeyThunk(searchKey))
                         }}>Search
@@ -36,7 +36,7 @@ const ExtRecipeSearch = () => {
                 </li>
                 {
                     recipes && recipes.map((recipe) =>
-                        <li key={recipe.idMeal} className="list-group-item">
+                        <li key={recipe.idMeal} className="find-result list-group-item border-0 ">
                             <img alt="" src={recipe.strMealThumb} height={50} />
                             <Link to={`/create-recipe/${recipe.idMeal}`}>
                                 {recipe.strMeal}
