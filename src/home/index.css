@@ -1,20 +1,11 @@
-.likedtext{
-   font-family:"Fantasy",sans-serif;
-   color:blue;
-   background:linear-gradient(yellow, red);
+#welcome-text{
+    text-align: right;
+    font-size: large;
+    color: #343434;
 }
-.likedtexts{
-   font-family:"Fantasy",sans-serif;
-   color:blue;
-   background-color: red;
-}
-.likedtext1{
-   font-family:"Fantasy",sans-serif;
-   color:blue;
-  background:linear-gradient(yellow, red);
-}
-.likedtext2{
-   font-family:"Fantasy",sans-serif;
-   color:blue;
-   background:linear-gradient(yellow, red);
+.home-subtitle{
+    margin-bottom: 10px;
+    margin-left: 320px;
+    color: #2e3083;
+
 }

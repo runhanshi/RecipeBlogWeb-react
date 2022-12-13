@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { findIntRecipeBySearchKeyThunk } from "./int-recipe-thunks";
 import { Link } from "react-router-dom";
-
+import "./int-reipe-search.css"
 const IntRecipeSearch = () => {
     const [searchKey, setSearchKey] = useState('')
     const { recipes } = useSelector((state) => state.int_recipe)
@@ -15,9 +15,9 @@ const IntRecipeSearch = () => {
         <>
             <h1>Recipe Search</h1>
             <ul className="list-group">
-                <li className="list-group-item">
+                <li className="search-bar list-group-item border-0">
                     <button
-                        className="btn btn-primary float-end"
+                        className=" btn btn-secondary float-end"
                         onClick={() => {
                             dispatch(findIntRecipeBySearchKeyThunk(searchKey))
                         }}>Search
@@ -31,9 +31,9 @@ const IntRecipeSearch = () => {
                 </li>
                 {
                     recipes && recipes.map((recipe) =>
-                        <li key={recipe.name} className="list-group-item">
-                            <img alt="" src={recipe.picture} height={50} />
-                            <Link to={`/recipes/${recipe._id}`}>
+                        <li key={recipe.name} className="search-result list-group-item border-0">
+                            <img className="" alt="" src={recipe.picture} height={50} />
+                            <Link className="name-font ms-3 " to={`/recipes/${recipe._id}`}>
                                 {recipe.name}
                             </Link>
                         </li>
