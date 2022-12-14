@@ -228,7 +228,7 @@ const IntRecipeDetails = () => {
             {
                 (isRecommended() && !isRecommendedByCurrentUserGourmet()) &&
                 (
-                    <div>
+                    <div className="mb-4">
                         Recommended by
                         <Link to={`/profile/${int_recipe_details.recommendedByID}`}> {int_recipe_details.recommendedByName}
                         </Link>
@@ -246,16 +246,17 @@ const IntRecipeDetails = () => {
 
             {
                 (currentUser && (currentUser.usertype === 'CUSTOMER')) &&
-                <div>
+                <div className="mt-10">
                     <textarea
                         onChange={(e) => setComment(e.target.value)}
-                        className="form-control"/>
-                    <button onClick={handleCreateCommentBtn}>Comment</button>
+                        className="form-control mt-4"/>
+                    <button className="mt-2 btn btn-primary float-end" onClick={handleCreateCommentBtn}>Comment</button>
                 </div>
             }
 
             <br/>
 
+            <div className="mt-5">
             <ul className="list-group">
                 {
                     comments.map((comment) =>
@@ -268,6 +269,7 @@ const IntRecipeDetails = () => {
                     )
                 }
             </ul>
+            </div>
 
 
         </>
