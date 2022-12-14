@@ -31,7 +31,7 @@ const IntRecipeSearch = () => {
                 </li>
                 {
                     recipes && recipes.map((recipe) =>
-                        <li key={recipe.name} className="search-result list-group-item border  border-2 border-info">
+                        <li key={recipe.name} className="search-result list-group-item">
                             <img className="" alt="" src={recipe.picture} height={50} />
                             <Link className="name-font ms-3 " to={`/recipes/${recipe._id}`}>
                                 {recipe.name}

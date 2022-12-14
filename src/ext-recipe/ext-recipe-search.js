@@ -20,7 +20,7 @@ const ExtRecipeSearch = () => {
         <>
             <h1>Create Recipe</h1>
             <ul className="list-group">
-                <li className="find-bar list-group-item border border-success">
+                <li className="find-bar list-group-item">
                     <button
                         className="btn btn-secondary float-end"
                         onClick={() => {
@@ -36,7 +36,7 @@ const ExtRecipeSearch = () => {
                 </li>
                 {
                     recipes && recipes.map((recipe) =>
-                        <li key={recipe.idMeal} className="find-result list-group-item border border-danger">
+                        <li key={recipe.idMeal} className="find-result list-group-item">
                             <img alt="" src={recipe.strMealThumb} height={50} />
                             <Link to={`/create-recipe/${recipe.idMeal}`}>
                                 {recipe.strMeal}
