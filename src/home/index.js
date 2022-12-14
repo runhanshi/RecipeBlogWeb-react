@@ -25,10 +25,13 @@ const Home = () => {
             }
 
             <div className="mb-5">
-                <h2 className="home-subtitle mb-4">Most Recently Recommended Recipes</h2>
+                {
+                    currentUser && (<h2 className="home-subtitle mb-4">Most Recently Recommended Recipes</h2>)
+                }
+
                 <div className="row">
                     {
-                        mostRecentTenRecommendations && mostRecentTenRecommendations.map((recommendation) =>
+                        currentUser && mostRecentTenRecommendations && mostRecentTenRecommendations.map((recommendation) =>
                             <div className="col-12 col-md-6 col-xl-3 row-box">
                                 <div className="card " style={{width: "95%",}}>
                                     <img src={recommendation.recipe.picture} className="card-img-top" alt=""/>
