@@ -4,5 +4,10 @@
 }
 .search-result{
     background-color: #f6f2f1;
+}
 
+
+.no-result {
+    margin: 2em;
+    font-weight: 500;
 }

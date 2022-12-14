@@ -5,6 +5,9 @@ const DETAILS_URL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i='
 
 export const findRecipeBySearchKey = async (search_key) => {
     const response = await axios.get(`${SEARCH_URL}${search_key}`)
+    if (response.data.meals === null) {
+        return []
+    }
     return response.data.meals
 }
 
