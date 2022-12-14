@@ -21,55 +21,73 @@ const Home = () => {
         <>
             {
                 currentUser &&
-                <h2 id="welcome-text">Welcome {currentUser.username}, {currentUser.usertype} </h2>
+                <h2 id="welcome-text">Welcome {currentUser.usertype}, {currentUser.username} </h2>
             }
 
-            <h2 className="home-subtitle">Most Recently Recommended Recipes</h2>
-            <ul className="list-group">
-                {
-                    mostRecentTenRecommendations && mostRecentTenRecommendations.map((recommendation) =>
-                        <li key={recommendation.recipe.name} className="list-group-item bg-light">
-                            <img alt="" src={recommendation.recipe.picture} height={50} />
-                            <Link to={`/recipes/${recommendation.recipe._id}`}>
-                                {recommendation.recipe.name}
-                            </Link>
-                        </li>
-                    )
-                }
-            </ul>
-
-            <h2 className="home-subtitle">Most Recently Liked Recipes</h2>
-            <ul className="list-group">
-                {
-                    mostRecentLikes && mostRecentLikes.map((like) =>
-                        like.recipe.map((r) =>
-                            <li key={r.name} className="list-group-item bg-light">
-                                <img alt="" src={r.picture} height={50} />
-                                <Link to={`/recipes/${r._id}`}>
-                                    {r.name}
-                                </Link>
-                            </li>
+            <div className="mb-5">
+                <h2 className="home-subtitle mb-4">Most Recently Recommended Recipes</h2>
+                <div className="row">
+                    {
+                        mostRecentTenRecommendations && mostRecentTenRecommendations.map((recommendation) =>
+                            <div className="col-12 col-md-6 col-xl-3 row-box">
+                                <div className="card " style={{width: "95%",}}>
+                                    <img src={recommendation.recipe.picture} className="card-img-top" alt=""/>
+                                    <div className="card-body">
+                                        <Link className="recipe-name" style={{ textDecoration: 'none' }}
+                                              to={`/recipes/${recommendation.recipe._id}`}>
+                                            {recommendation.recipe.name}
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
                         )
-                    )
-                }
-            </ul>
+                    }
+                </div>
+            </div>
 
-            <h2 className="home-subtitle">Most Recently Created Recipes</h2>
-            <ul className="list-group" >
-                {
-                    recentlyCreatedRecipes && recentlyCreatedRecipes.map((recipe) =>
-                        <li key={recipe.name} className="list-group-item bg-light">
-                            <img alt="" src={recipe.picture} height={50} />
-                            <Link to={`/recipes/${recipe._id}`}>
-                                {recipe.name}
-                            </Link>
-                        </li>
-                    )
-                }
-            </ul>
-            <pre>
-                {JSON.stringify(recentlyCreatedRecipes, null, 2)}
-            </pre>
+            <div className="mb-5">
+                <h2 className="home-subtitle mb-4">Most Recently Liked Recipes</h2>
+                <div className="row">
+                    {
+                        mostRecentLikes && mostRecentLikes.map((like) =>
+                            like.recipe.map((recipe) =>
+                                <div className="col-12 col-md-6 col-xl-3 row-box">
+                                    <div className="card " style={{width: "95%",}}>
+                                        <img src={recipe.picture} className="card-img-top" alt=""/>
+                                        <div className="card-body">
+                                            <Link className="recipe-name" style={{ textDecoration: 'none' }}
+                                                  to={`/recipes/${recipe._id}`}>
+                                                {recipe.name}
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        )
+                    }
+                </div>
+            </div>
+
+            <div className="mb-5">
+                <h2 className="home-subtitle mb-4">Most Recently Created Recipes</h2>
+                <div className="row">
+                    {
+                        recentlyCreatedRecipes && recentlyCreatedRecipes.map((recipe) =>
+                            <div className="col-12 col-md-6 col-xl-3 row-box">
+                                <div className="card " style={{width: "95%",}}>
+                                    <img src={recipe.picture} className="card-img-top" alt=""/>
+                                    <div className="card-body">
+                                        <Link className="recipe-name" style={{ textDecoration: 'none' }}
+                                              to={`/recipes/${recipe._id}`}>
+                                            {recipe.name}
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }
+                </div>
+            </div>
         </>
     )
 }
