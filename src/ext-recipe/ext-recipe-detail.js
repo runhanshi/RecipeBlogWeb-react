@@ -6,7 +6,7 @@ import { useNavigate } from "react-router"
 import {findRecipeByIdThunk} from "./ext-recipe-thunks";
 import {createRecipeThunk, findIfRecipeExistsThunk} from "../int-recipe/int-recipe-thunks";
 import RecipeTable from "./recipe-table";
-
+import "./ext-recipe-detail.css"
 const ExtRecipeDetails = () => {
     const { recipeID } = useParams()
     const { details } = useSelector((state) => state.ext_recipe)
@@ -72,23 +72,6 @@ const ExtRecipeDetails = () => {
 
     return (
         <>
-            <h1>{details.strMeal}</h1>
-            <div className="row">
-                <div className="col">
-                    <img alt="" src={details.strMealThumb} height={500} />
-                </div>
-            </div>
-            <div>
-                <h2>Category</h2>
-                {details.strCategory}
-                <h2>Ingredients</h2>
-                <RecipeTable param={ingredientMatrix}/>
-                <br/>
-                <h2>Instructions</h2>
-                {details.strInstructions}
-            </div>
-            <br/>
-
             {
                 (currentUser && (currentUser.usertype === 'CHEF')
                     && (recipeExistence) && (!recipeExistence.existence))
@@ -103,12 +86,31 @@ const ExtRecipeDetails = () => {
                 (currentUser && (currentUser.usertype === 'CHEF')
                     && (recipeExistence) && (recipeExistence.existence))
                 &&
-                (<p>Recipe Already Exists</p>)
+                (<p className="">Recipe Already Exists</p>)
             }
+            <h1 className="aaa edit-label mb-3">{details.strMeal}</h1>
+            <div className="row">
+                <div className="col">
+                    <img alt="" class=" rounded-4 mt-2 mb-2 pic1" src={details.strMealThumb} height={500} />
+                </div>
+            </div>
+            <div>
+                <h2 className="edit-label mt-5">Category</h2>
+                <p className="">
+                    {details.strCategory}
+                </p>
 
-            <pre>
-                {JSON.stringify(details, null, 2)}
-            </pre>
+                <h2 className="edit-label mt-5">Ingredients</h2>
+                <RecipeTable param={ingredientMatrix}/>
+                <br/>
+                <h2 className="edit-label mt-5">Instructions</h2>
+                <p className="">{details.strInstructions}</p>
+            </div>
+            <br/>
+
+
+
+
         </>
     )
 }

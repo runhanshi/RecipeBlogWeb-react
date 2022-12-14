@@ -8,7 +8,7 @@ class RecipeTable extends Component {
             return
         }
         return (
-            <div >
+            <div>
                 <Table heading={heading} body={body} />
             </div>
         )
@@ -20,7 +20,7 @@ class Table extends Component {
         let heading = this.props.heading;
         let body = this.props.body;
         return (
-            <table style={{ width: 500 }}>
+            <table class="table table-dark table-striped table-hover" style={{ width: 500 }}>
                 <thead>
                     <tr>
                         {heading.map(head => <th>{head}</th>)}

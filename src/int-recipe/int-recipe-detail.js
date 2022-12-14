@@ -270,9 +270,7 @@ const IntRecipeDetails = () => {
                 }
             </ul>
 
-            <pre>
-                {JSON.stringify(int_recipe_details, null, 2)}
-            </pre>
+
         </>
     )
 }
