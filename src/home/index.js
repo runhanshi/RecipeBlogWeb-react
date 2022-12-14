@@ -33,15 +33,17 @@ const Home = () => {
                     {
                         currentUser && mostRecentTenRecommendations && mostRecentTenRecommendations.map((recommendation) =>
                             <div className="col-12 col-md-6 col-xl-3 row-box">
+                                <Link className="recipe-name" style={{ textDecoration: 'none' }}
+                                      to={`/recipes/${recommendation.recipe._id}`}>
                                 <div className="card " style={{width: "95%",}}>
                                     <img src={recommendation.recipe.picture} className="card-img-top" alt=""/>
                                     <div className="card-body">
-                                        <Link className="recipe-name" style={{ textDecoration: 'none' }}
-                                              to={`/recipes/${recommendation.recipe._id}`}>
+
                                             {recommendation.recipe.name}
-                                        </Link>
+
                                     </div>
                                 </div>
+                                </Link>
                             </div>
                         )
                     }
@@ -55,15 +57,17 @@ const Home = () => {
                         mostRecentLikes && mostRecentLikes.map((like) =>
                             like.recipe.map((recipe) =>
                                 <div className="col-12 col-md-6 col-xl-3 row-box">
+                                    <Link className="recipe-name" style={{ textDecoration: 'none' }}
+                                          to={`/recipes/${recipe._id}`}>
                                     <div className="card " style={{width: "95%",}}>
                                         <img src={recipe.picture} className="card-img-top" alt=""/>
                                         <div className="card-body">
-                                            <Link className="recipe-name" style={{ textDecoration: 'none' }}
-                                                  to={`/recipes/${recipe._id}`}>
+
                                                 {recipe.name}
-                                            </Link>
+
                                         </div>
                                     </div>
+                                    </Link>
                                 </div>
                             )
                         )
@@ -77,15 +81,15 @@ const Home = () => {
                     {
                         recentlyCreatedRecipes && recentlyCreatedRecipes.map((recipe) =>
                             <div className="col-12 col-md-6 col-xl-3 row-box">
+                                <Link className="recipe-name" style={{ textDecoration: 'none' }}
+                                      to={`/recipes/${recipe._id}`}>
                                 <div className="card " style={{width: "95%",}}>
                                     <img src={recipe.picture} className="card-img-top" alt=""/>
                                     <div className="card-body">
-                                        <Link className="recipe-name" style={{ textDecoration: 'none' }}
-                                              to={`/recipes/${recipe._id}`}>
                                             {recipe.name}
-                                        </Link>
                                     </div>
                                 </div>
+                                </Link>
                             </div>
                         )
                     }

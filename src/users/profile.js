@@ -201,12 +201,13 @@ const Profile = () => {
                                             {recipes.map((v, i) => {
                                                 return (
                                                     <div key={i} className="col-xs-8 col-sm-6 col-lg-6 mb-3">
+                                                        <Link className="card-recipe-name" to={`/recipes/${v._id}`}>
                                                         <div className="card " style={{width: "100%",}}>
                                                             <img src={v.picture} className="card-img-top" alt="..."/>
                                                             <div className="card-body">
-                                                                <Link className="card-recipe-name" to={`/recipes/${v._id}`}>
+
                                                                     {v.name}
-                                                                </Link>
+
                                                                 <div style={{
                                                                     overflow: "hidden",
                                                                     textOverflow: "ellipsis",
@@ -218,6 +219,7 @@ const Profile = () => {
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        </Link>
                                                     </div>
                                                 );
                                             })}
@@ -242,12 +244,12 @@ const Profile = () => {
                                             {recommends.map((v, i) => {
                                                 return (
                                                     <div key={i} className="col-xs-8 col-sm-6 col-lg-6 mb-3">
+                                                        <Link className="card-recipe-name" to={`/recipes/${v.recipe._id}`}>
+                                                            {v.recipe.name}
                                                         <div className="card" style={{width: "100%",}}>
                                                             <img src={v.recipe.picture} className="card-img-top" alt="..."/>
                                                             <div className="card-body">
-                                                                <Link className="card-recipe-name" to={`/recipes/${v.recipe._id}`}>
-                                                                    {v.recipe.name}
-                                                                </Link>
+
                                                                 <div style={{
                                                                     overflow: "hidden",
                                                                     textOverflow: "ellipsis",
@@ -259,6 +261,7 @@ const Profile = () => {
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        </Link>
                                                     </div>
                                                 );
                                             })}
@@ -284,12 +287,13 @@ const Profile = () => {
                                         {likes.map((v, i) => {
                                             return (
                                                 <div key={i} className="col-xs-8 col-sm-6 col-lg-6 mb-3">
+                                                    <Link  className="card-recipe-name" to={`/recipes/${v.recipe._id}`}>
                                                     <div className="card" style={{width: "100%",}}>
                                                         <img src={v.recipe.picture} className="card-img-top" alt="..."/>
                                                         <div className="card-body">
-                                                            <Link  className="card-recipe-name" to={`/recipes/${v.recipe._id}`}>
+
                                                                 {v.recipe.name}
-                                                            </Link>
+
                                                             <div style={{
                                                                 overflow: "hidden",
                                                                 textOverflow: "ellipsis",
@@ -301,6 +305,7 @@ const Profile = () => {
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    </Link>
                                                 </div>
                                             );
                                         })}
