@@ -86,7 +86,7 @@ const ExtRecipeDetails = () => {
                 (currentUser && (currentUser.usertype === 'CHEF')
                     && (recipeExistence) && (recipeExistence.existence))
                 &&
-                (<p className="">Recipe Already Exists</p>)
+                (<p className="position1">Recipe Already Exists</p>)
             }
             <h1 className="aaa edit-label mb-3">{details.strMeal}</h1>
             <div className="row">
@@ -96,7 +96,7 @@ const ExtRecipeDetails = () => {
             </div>
             <div>
                 <h2 className="edit-label mt-5">Category</h2>
-                <p className="">
+                <p className="btn btn-success fs-5 ">
                     {details.strCategory}
                 </p>
 
@@ -104,7 +104,7 @@ const ExtRecipeDetails = () => {
                 <RecipeTable param={ingredientMatrix}/>
                 <br/>
                 <h2 className="edit-label mt-5">Instructions</h2>
-                <p className="">{details.strInstructions}</p>
+                <p className="instructions fst-normal fw-bolder">{details.strInstructions}</p>
             </div>
             <br/>
 

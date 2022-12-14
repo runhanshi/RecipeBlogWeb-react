@@ -165,10 +165,10 @@ const IntRecipeDetails = () => {
 
     return (
         <>
-            <h1>{int_recipe_details.name}</h1>
+            <h1  className="aaa edit-label mb-3">{int_recipe_details.name}</h1>
 
             {currentUser && (
-                <div>
+                <div id="create-by">
                     Created By
                     <Link to={`/profile/${int_recipe_details.chefID}`}> {int_recipe_details.chef}
                     </Link>
@@ -177,19 +177,19 @@ const IntRecipeDetails = () => {
 
             <div className="row">
                 <div className="col">
-                    <img alt="" src={int_recipe_details.picture} height={500}/>
+                    <img alt="" class=" rounded-4 mt-2 mb-2 pic1"  src={int_recipe_details.picture} height={500}/>
                 </div>
             </div>
             <div>
-                <h2>Category</h2>
-                {int_recipe_details.category}
-                <h2>Ingredients</h2>
+                <h2 className="edit-label mt-5">Category</h2>
+                <p className="btn btn-success fs-5 " >{int_recipe_details.category}</p>
+                <h2 className="edit-label mt-5">Ingredients</h2>
                 { int_recipe_details &&
                     (<RecipeTable param={int_recipe_details.ingredients}/>)
                 }
                 <br/>
-                <h2>Instructions</h2>
-                {int_recipe_details.instructions}
+                <h2 className="edit-label mt-5">Instructions</h2>
+                <p className="instructions fst-normal fw-bolder">{int_recipe_details.instructions}</p>
             </div>
             <br/>
 
@@ -237,13 +237,21 @@ const IntRecipeDetails = () => {
             <br/>
             <br/>
 
+
+            <div className="">
             {
                 (currentUser && (currentUser._id === int_recipe_details.chefID)) && (
+
+
                     <button
-                        className="btn btn-primary float-end"
+                        className="del btn btn-primary"
                         onClick={handleDeleteRecipeBtn}>Delete
                     </button>)
+
             }
+            </div>
+
+
 
             {
                 (currentUser && (currentUser.usertype === 'CUSTOMER')) &&

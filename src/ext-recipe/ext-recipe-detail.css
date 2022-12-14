@@ -10,3 +10,13 @@
 .edit-label{
     font-style: italic
 }
+.position1{
+    text-align: right;
+    font-size: 1.2em;
+    color: #343434;
+    font-family: "Arial Black";
+
+}
+.instructions{
+    font-family: Calibri;
+}

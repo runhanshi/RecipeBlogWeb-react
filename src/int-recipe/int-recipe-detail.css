@@ -1,0 +1,18 @@
+.edit-label{
+    font-style: italic
+}
+.aaa{
+    color: #2d2d0b;
+}
+#create-by{
+    text-align: right;
+    font-size: 1em;
+    color: #343434;
+}
+.a{
+    display: block;
+}
+.del{
+    float: right;
+
+}
