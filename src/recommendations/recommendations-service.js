@@ -11,7 +11,7 @@ export const gourmetRecommendsRecipe = async (gid, rid) => {
 }
 
 export const gourmetUnrecommendsRecipe = async (gid, rid) => {
-    const response = await axios.post(`${GOURMETS_URL}/${gid}/unrecommends/${rid}`)
+    const response = await axios.delete(`${GOURMETS_URL}/${gid}/unrecommends/${rid}`)
     return response.data
 }
 
