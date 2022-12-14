@@ -15,7 +15,7 @@ const IntRecipeSearch = () => {
         <>
             <h1>Recipe Search</h1>
             <ul className="list-group">
-                <li className="search-bar list-group-item border-0">
+                <li className="search-bar list-group-item">
                     <button
                         className=" btn btn-secondary float-end"
                         onClick={() => {
@@ -31,7 +31,7 @@ const IntRecipeSearch = () => {
                 </li>
                 {
                     recipes && recipes.map((recipe) =>
-                        <li key={recipe.name} className="search-result list-group-item border-0">
+                        <li key={recipe.name} className="search-result list-group-item border  border-2 border-info">
                             <img className="" alt="" src={recipe.picture} height={50} />
                             <Link className="name-font ms-3 " to={`/recipes/${recipe._id}`}>
                                 {recipe.name}

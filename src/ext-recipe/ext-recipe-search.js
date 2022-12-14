@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { findRecipeBySearchKeyThunk } from "./ext-recipe-thunks";
 import { Link } from "react-router-dom";
 import {Navigate} from "react-router";
-
+import "./ext-recipe-search.css"
 const ExtRecipeSearch = () => {
     const [searchKey, setSearchKey] = useState('')
     const { recipes } = useSelector((state) => state.ext_recipe)
@@ -20,7 +20,7 @@ const ExtRecipeSearch = () => {
         <>
             <h1>Create Recipe</h1>
             <ul className="list-group">
-                <li className="find-bar list-group-item border-0 ">
+                <li className="find-bar list-group-item border border-success">
                     <button
                         className="btn btn-secondary float-end"
                         onClick={() => {
@@ -36,7 +36,7 @@ const ExtRecipeSearch = () => {
                 </li>
                 {
                     recipes && recipes.map((recipe) =>
-                        <li key={recipe.idMeal} className="find-result list-group-item border-0 ">
+                        <li key={recipe.idMeal} className="find-result list-group-item border border-danger">
                             <img alt="" src={recipe.strMealThumb} height={50} />
                             <Link to={`/create-recipe/${recipe.idMeal}`}>
                                 {recipe.strMeal}

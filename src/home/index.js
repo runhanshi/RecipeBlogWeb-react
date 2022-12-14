@@ -28,7 +28,7 @@ const Home = () => {
             <ul className="list-group">
                 {
                     mostRecentTenRecommendations && mostRecentTenRecommendations.map((recommendation) =>
-                        <li key={recommendation.recipe.name} className="list-group-item bg-light">
+                        <li key={recommendation.recipe.name} className="list-group-item bg-light border  border-2 border-info">
                             <img alt="" src={recommendation.recipe.picture} height={50} />
                             <Link to={`/recipes/${recommendation.recipe._id}`}>
                                 {recommendation.recipe.name}
@@ -43,7 +43,7 @@ const Home = () => {
                 {
                     mostRecentLikes && mostRecentLikes.map((like) =>
                         like.recipe.map((r) =>
-                            <li key={r.name} className="list-group-item bg-light">
+                            <li key={r.name} className="list-group-item bg-light border  border-2 border-info">
                                 <img alt="" src={r.picture} height={50} />
                                 <Link to={`/recipes/${r._id}`}>
                                     {r.name}
@@ -58,7 +58,7 @@ const Home = () => {
             <ul className="list-group" >
                 {
                     recentlyCreatedRecipes && recentlyCreatedRecipes.map((recipe) =>
-                        <li key={recipe.name} className="list-group-item bg-light">
+                        <li key={recipe.name} className="list-group-item bg-light border  border-2 border-info">
                             <img alt="" src={recipe.picture} height={50} />
                             <Link to={`/recipes/${recipe._id}`}>
                                 {recipe.name}

@@ -1,8 +1,12 @@
 .search-bar{
     background-color: #c4beb3;
+
 }
 .search-result{
     background-color: #f6f2f1;
+    border: 10px solid blue;
+    border-block-end-color: red;
+
 }
 .name-font{
     color: #0a0808;
