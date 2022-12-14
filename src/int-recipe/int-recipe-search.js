@@ -40,9 +40,11 @@ const IntRecipeSearch = () => {
                     )
                 }
             </ul>
-            <pre>
-                {JSON.stringify(recipes, null, 2)}
-            </pre>
+
+            {
+                recipes && recipes.length === 0
+                && (<p className="no-result"> No result </p>)
+            }
         </>
     )
 }

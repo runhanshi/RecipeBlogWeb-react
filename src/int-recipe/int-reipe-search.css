@@ -9,3 +9,8 @@
 .name-font{
     color: #0a0808;
 }
+
+.no-result {
+    margin: 2em;
+    font-weight: 500;
+}
