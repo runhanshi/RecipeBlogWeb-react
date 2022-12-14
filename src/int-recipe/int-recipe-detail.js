@@ -39,8 +39,10 @@ const IntRecipeDetails = () => {
         }))
         response.then((data) => {
             console.log("commented!")
+            dispatch(findCommentByRecipeThunk(intRecipeID))
             setComment('')
         })
+
     }
 
     const handleDeleteRecipeBtn = () => {
@@ -249,7 +251,9 @@ const IntRecipeDetails = () => {
                 <div className="mt-10">
                     <textarea
                         onChange={(e) => setComment(e.target.value)}
-                        className="form-control mt-4"/>
+                        className="form-control mt-4"
+                        value={comment}
+                    />
                     <button className="mt-2 btn btn-primary float-end" onClick={handleCreateCommentBtn}>Comment</button>
                 </div>
             }
@@ -257,7 +261,7 @@ const IntRecipeDetails = () => {
             <br/>
 
             <div className="mt-5">
-            <ul className="list-group">
+            <ul className="list-group" id="comments">
                 {
                     comments.map((comment) =>
                         <li className="list-group-item">
