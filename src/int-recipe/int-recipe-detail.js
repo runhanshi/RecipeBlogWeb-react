@@ -165,6 +165,15 @@ const IntRecipeDetails = () => {
 
     return (
         <>
+            {
+                (currentUser && (currentUser._id === int_recipe_details.chefID)) && (
+                    <button
+                        className="btn btn-warning float-end"
+                        onClick={handleDeleteRecipeBtn}>Delete
+                    </button>
+                )
+            }
+
             <h1  className="aaa edit-label mb-3">{int_recipe_details.name}</h1>
 
             {currentUser && (
@@ -220,9 +229,8 @@ const IntRecipeDetails = () => {
                 (isRecommended() && !isRecommendedByCurrentUserGourmet()) &&
                 (
                     <div>
-                        Recommended By
-                        <Link to={`/profile/${int_recipe_details.recommendedByID}`}>
-                            {int_recipe_details.recommendedByName}
+                        Recommended by
+                        <Link to={`/profile/${int_recipe_details.recommendedByID}`}> {int_recipe_details.recommendedByName}
                         </Link>
                     </div>
                 )
@@ -235,23 +243,6 @@ const IntRecipeDetails = () => {
             }
 
             <br/>
-            <br/>
-
-
-            <div className="">
-            {
-                (currentUser && (currentUser._id === int_recipe_details.chefID)) && (
-
-
-                    <button
-                        className="del btn btn-primary"
-                        onClick={handleDeleteRecipeBtn}>Delete
-                    </button>)
-
-            }
-            </div>
-
-
 
             {
                 (currentUser && (currentUser.usertype === 'CUSTOMER')) &&
