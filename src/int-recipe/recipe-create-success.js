@@ -1,7 +1,7 @@
 import {Navigate, useParams} from "react-router";
 import { useSelector } from "react-redux";
 import {Link, useLocation} from "react-router-dom";
-
+import "./recipe-create-success.css"
 const RecipeCreateSuccess = () => {
     const { intRecipeID } = useParams()
     const { currentUser } = useSelector((state) => state.users)
@@ -14,15 +14,13 @@ const RecipeCreateSuccess = () => {
 
     return (
         <>
-            <p>Thank you {currentUser.username}</p>
-            <p>You just created a recipe for {recipeName}</p>
-            <Link to={`/recipes/${intRecipeID}`}>
+            <h2 className="mb-2">Thank you {currentUser.username} !</h2>
+            <h4 className="font1 font">You just created a recipe for {recipeName}</h4>
+            <Link to={`/recipes/${intRecipeID}`} className="">
                 View Recipe
             </Link>
 
-            <pre>
-                {JSON.stringify(currentUser, null, 2)}
-            </pre>
+
         </>
     )
 }
